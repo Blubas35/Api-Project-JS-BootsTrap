@@ -20,7 +20,7 @@ async function init() {
     const postAuthorLink = document.createElement('a')
     postAuthorLink.classList.add('post-author-link')
     postAuthorLink.textContent = `${posts.userId}`
-    postAuthorLink.href = `https://jsonplaceholder.typicode.com/users/${posts.userId}?_embed=posts&_embed=albums`
+    postAuthorLink.href = `user.html`
 
     const postBody = document.createElement('p')
     postBody.classList.add('post-body')

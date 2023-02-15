@@ -69,7 +69,7 @@ async function renderUser() {
         const userPostLink = document.createElement('a')
         userPostLink.classList.add('user-post-link')
         userPostLink.textContent = `${title}`
-        userPostLink.href = `https://jsonplaceholder.typicode.com/posts/${id}?_embed=comments`
+        userPostLink.href = `post.html`
         
         // const userPostId = document.createElement('span')
         // userPostId.classList.add('user-post-id')
