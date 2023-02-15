@@ -1,10 +1,16 @@
-const pageContent = document.querySelector('#page-content')
+import { createPageMainHeader } from "./header.js"
+// import { firstLetterUpperCase } from "./function.js"
 
 async function init() {
-    const id = 25
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}?_embed=comments`)
-    const posts = await res.json()
+    const pageContent = document.querySelector('#page-content')
+    pageContent.before(createPageMainHeader())
+    const queryParams = location.search
+    const urlParams = new URLSearchParams(queryParams)
+    const id = urlParams.get('post_id')
 
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}?_expand=user&_embed=comments`)
+    const posts = await res.json()
+    
     let { title, body, comments, userId } = posts
 
     const postsWrapper = document.createElement('div')
@@ -12,19 +18,19 @@ async function init() {
 
     const postsTitle = document.createElement('h2')
     postsTitle.classList.add('posts-title')
-    postsTitle.textContent = `${title}`
+    postsTitle.textContent = title
 
     const postsAuthor = document.createElement('h3')
     postsAuthor.classList.add('posts-author')
 
     const postAuthorLink = document.createElement('a')
     postAuthorLink.classList.add('post-author-link')
-    postAuthorLink.textContent = `${posts.userId}`
-    postAuthorLink.href = `user.html`
+    postAuthorLink.textContent = `${posts.user.name}`
+    postAuthorLink.href = `./user.html?user_id=${userId}`
 
     const postBody = document.createElement('p')
     postBody.classList.add('post-body')
-    postBody.textContent = `${body}`
+    postBody.textContent = firstLetterUpperCase(body)
 
     postsAuthor.append(postAuthorLink)
 
@@ -47,11 +53,11 @@ async function init() {
 
         const commentTitle = document.createElement('h3')
         commentTitle.classList.add('comment-title')
-        commentTitle.textContent = `${name}`
+        commentTitle.textContent = firstLetterUpperCase(name)
 
         const commentBody = document.createElement('p')
         commentBody.classList.add('comment-body')
-        commentBody.textContent = `${body}`
+        commentBody.textContent = firstLetterUpperCase(body)
 
         const commentEmail = document.createElement('a')
         commentEmail.classList.add('comment-email')
@@ -68,7 +74,7 @@ async function init() {
     
     const otherPosts = document.createElement('a')
     otherPosts.classList.add('other-posts')
-    otherPosts.textContent = `Other posts by: ${userId}`
+    otherPosts.textContent = `Other posts by: ${posts.user.name}`
     otherPosts.href = `posts.html`
     
     otherPostsElement.append(otherPosts)

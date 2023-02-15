@@ -1,7 +1,10 @@
 const pageContent = document.querySelector('#page-content')
 
 async function renderUser() {
-    const id = 5
+    const queryParams = location.search
+    const urlParams = new URLSearchParams(queryParams)
+    const id = urlParams.get('user_id')
+
     const res = await fetch(`https://jsonplaceholder.typicode.com/users/${id}?_embed=posts&_embed=albums`)
     const users = await res.json()
 
@@ -15,37 +18,41 @@ async function renderUser() {
 
     const userNameElement = document.createElement('p')
     userNameElement.classList.add('user-name')
-    userNameElement.textContent = `${name}`
+    userNameElement.textContent = `Full name: ${name}`
 
     const userNickNameElement = document.createElement('p')
     userNickNameElement.classList.add('nick-name')
-    userNickNameElement.textContent = `${username}`
+    userNickNameElement.textContent = `Username: ${username}`
 
     const userEmailElement = document.createElement('p')
     userEmailElement.classList.add('user-email')
-    userEmailElement.textContent = `${email}`
+    userEmailElement.textContent = `Email address: ${email}`
 
     const userAddressElement = document.createElement('p')
     userAddressElement.classList.add('user-address')
-    userAddressElement.textContent = `Address: ${street}, ${suite}, ${city}, ${zipcode}`
 
     const userAddressMapElement = document.createElement('a')
     userAddressMapElement.classList.add('user-address-link')
-    userAddressMapElement.textContent = 'Google maps'
+    userAddressMapElement.textContent = `Address: ${street}, ${suite}, ${city}, ${zipcode}`
+
     userAddressMapElement.setAttribute('target', '_blank')
     userAddressMapElement.href = `https://www.google.com/maps/place/${lat},${lng}`
 
     const userPhoneElement = document.createElement('p')
     userPhoneElement.classList.add('user-phone')
-    userPhoneElement.textContent = `${phone}`
+    userPhoneElement.textContent = `Phone number: ${phone}`
 
-    const userWebsiteElement = document.createElement('p')
+    const spanElement = document.createElement('span')
+    spanElement.textContent = `Website:`
+    const userWebsiteElement = document.createElement('a')
     userWebsiteElement.classList.add('user-website')
-    userWebsiteElement.textContent = `${website}`
+    userWebsiteElement.textContent = ` ${website}`
+    userWebsiteElement.href = '#'
+    userWebsiteElement.prepend(spanElement)
 
     const userCompanyNameElement = document.createElement('p')
     userCompanyNameElement.classList.add('user-company-name')
-    userCompanyNameElement.textContent = `${companyName}`
+    userCompanyNameElement.textContent = `Company name: ${companyName}`
 
     userInfoElement.append(userNameElement, userNickNameElement, userEmailElement, userAddressElement, userAddressMapElement, userPhoneElement, userWebsiteElement, userCompanyNameElement)
 
@@ -69,7 +76,7 @@ async function renderUser() {
         const userPostLink = document.createElement('a')
         userPostLink.classList.add('user-post-link')
         userPostLink.textContent = `${title}`
-        userPostLink.href = `post.html`
+        userPostLink.href = `./post.html?post_id=${post.id}`
         
         // const userPostId = document.createElement('span')
         // userPostId.classList.add('user-post-id')
@@ -94,11 +101,11 @@ async function renderUser() {
     albums.map(album => {
         const userAlbumTitle = document.createElement('li')
         userAlbumTitle.classList.add('user-album-title')
-
+        console.log(album)
         const userAlbumLink = document.createElement('a')
         userAlbumLink.classList.add('album-link')
         userAlbumLink.textContent = `${album.title}`
-        userAlbumLink.href = `#`
+        userAlbumLink.href = `./album.html?album_id=${album.id}`
 
         userAlbumTitle.append(userAlbumLink)
         userAlbumList.append(userAlbumTitle)

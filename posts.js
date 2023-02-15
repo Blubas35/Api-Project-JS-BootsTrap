@@ -15,6 +15,8 @@
 //     return user.name
 // }
 
+import { createPageMainHeader } from './header.js'
+
 
 async function init() {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=15&_expand=user');
@@ -39,11 +41,11 @@ async function init() {
       
       const postLink = document.createElement('a');
       postLink.textContent = post.title;
-      postLink.href = './post.html';
+      postLink.href = './post.html?post_id=' + post.id;
   
       const postAuthor = document.createElement('a');
       postAuthor.textContent = `${userName}`;
-      postAuthor.href = './user.html';
+      postAuthor.href = './user.html?user_id=' + post.userId;
   
       postItem.append(postLink, ' - ', postAuthor);
   
@@ -52,113 +54,5 @@ async function init() {
   
     return postsList;
   }
-  
-  function createPageMainHeader() {
-    const header = document.createElement('header');
-    const nav = document.createElement('nav');
-    nav.classList.add('main-navigation');
-    const menuList = document.createElement('ul');
-    menuList.classList.add('menu');
-  
-    const menuItems = [
-      {
-        title: 'Home',
-        path: 'index.html',
-      },
-      {
-        title: 'Posts',
-        path: 'posts.html',
-      },
-      {
-        title: 'Users',
-        path: 'users.html',
-      },
-      {
-        title: 'Albums',
-        path: 'albums.html',
-      },
-    ];
-  
-    menuItems.forEach(menuItem => {
-      // let title = menuItem.title;
-      // let path = menuItem.path;
-      let { title, path } = menuItem;
-  
-      const menuItemElement = document.createElement('li');
-      menuItemElement.classList.add('menu-item');
-  
-      if (location.pathname === '/' + path) {
-        menuItemElement.classList.add('active');
-      }
-  
-      const menuLink = document.createElement('a');
-      menuLink.textContent = title;
-      menuLink.href = './' + path;
-  
-      menuItemElement.append(menuLink);
-      menuList.append(menuItemElement);
-    })
-  
-    nav.append(menuList);
-    header.append(nav);
-    return header;
-  }
-  
+ 
   init();
-
-// async function getPosts() {
-//     const res = await fetch(`https://jsonplaceholder.typicode.com/posts?_expand=user&_embed=comments`)
-//     const posts = await res.json()
-
-//     const pageContent = document.querySelector('#page-content')
-
-//     const postList = document.createElement('ul')
-//     postList.classList.add('post-list')
-
-//     pageContent.append(postList)
-
-//     posts.map(async post => {
-//         const postTitle = post.title
-//         console.log(post)
-//         const postItem = document.createElement('li')
-//         postItem.classList.add('post-item')
-
-//         const postLink = document.createElement('a')
-//         postLink.textContent = postTitle
-//         postLink.href = './post.html'
-
-//         const postAuthor = document.createElement('a')
-//         postAuthor.textContent = `(${post.user.name})`
-//         postAuthor.href = './user.html'
-
-//         postItem.append(postLink, ' ', postAuthor)
-
-//         postList.append(postItem)
-
-//     })
-
-    // const res = await fetch(`https://jsonplaceholder.typicode.com/posts`)
-    // const posts = await res.json()
-
-    // const pageContent = document.querySelector('#page-content')
-
-    // const postList = document.createElement('ul')
-    // postList.classList.add('post-list')
-
-    // pageContent.append(postList)
-
-    // posts.map(async post => {
-    //     const postId = await getComments (post.id)
-    //     const userName = await getUser(post.userId)
-
-    //     const postTitle = post.title
-
-    //     const postItem = document.createElement('li')
-    //     postItem.classList.add('post-item')
-
-    //     postItem.innerHTML = `<a href="./posts.html">Post Title: ${postTitle}. Post author: ${userName}. (comment count: ${postId}) </a>`
-
-    //     postList.append(postItem)
-
-
-// getPosts()
