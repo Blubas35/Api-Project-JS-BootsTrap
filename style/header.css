@@ -1,0 +1,56 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url(images/pexels-gradienta-7135053.jpg);
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    max-width: 1230px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 70px;
+    column-gap: 50px;
+}
+
+.main-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    max-width: 1230px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+
+}
+
+.menu {
+    display: flex;
+    flex-direction: row;
+    column-gap: 15px;
+}
+
+.form {
+    padding-left: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 7px;
+  }
+
+.menu-item {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}

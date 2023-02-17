@@ -1,22 +1,7 @@
 // https://jsonplaceholder.typicode.com/users/${userId}?_embed=posts
 // https://jsonplaceholder.typicode.com/posts/?_expand=user (jeigu tevini paimti)
 // https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_limit=15
-
-
-// async function getComments(id) {
-//     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
-//     const comments = await res.json()
-//     return comments.length
-// }
-
-// async function getUser(userId) {
-//     const res = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`)
-//     const user = await res.json()
-//     return user.name
-// }
-
 import { createPageMainHeader } from './header.js'
-
 
 async function init() {
     const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=15&_expand=user');

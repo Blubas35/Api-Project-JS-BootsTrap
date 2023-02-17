@@ -1,4 +1,5 @@
 // https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_limit=15
+import { firstLetterUpperCase } from './function.js';
 import { createPageMainHeader } from './header.js'
 
 async function init() {
@@ -12,8 +13,6 @@ async function init() {
     const pageContent = document.querySelector('#page-content');
     const albumsList = createAlbumsListElement(albums);
    
-
-
     pageContent.append(albumsList);
     pageContent.before(createPageMainHeader());
 }
@@ -31,7 +30,7 @@ function createAlbumsListElement(albums) {
 }
 
 function createAlbumItemElement(album) {
-    const title = album.title;
+    const title = firstLetterUpperCase(album.title);
     const name = album.user.name;
     const photosNumber = album.photos.length;
     const randomIndex = Math.floor(Math.random() * album.photos.length);
@@ -50,7 +49,7 @@ function createAlbumItemElement(album) {
     const albumTitle = document.createElement('h2');
     albumTitle.textContent = `${title} (${photosNumber}), author: ${name}`;
 
-    albumItemLink.append(photoElement, albumTitle);
+    albumItemLink.append(albumTitle, photoElement,);
     albumItem.append(albumItemLink);
 
     return albumItem;

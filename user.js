@@ -1,6 +1,7 @@
 const pageContent = document.querySelector('#page-content')
 
 async function renderUser() {
+    
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
     const id = urlParams.get('user_id')
@@ -31,9 +32,13 @@ async function renderUser() {
     const userAddressElement = document.createElement('p')
     userAddressElement.classList.add('user-address')
 
+    const addressSpanElement = document.createElement('span')
+    addressSpanElement.classList.add('span-element')
+    addressSpanElement.textContent = 'Address: '
+
     const userAddressMapElement = document.createElement('a')
     userAddressMapElement.classList.add('user-address-link')
-    userAddressMapElement.textContent = `Address: ${street}, ${suite}, ${city}, ${zipcode}`
+    userAddressMapElement.textContent = `${street}, ${suite}, ${city}, ${zipcode}`
 
     userAddressMapElement.setAttribute('target', '_blank')
     userAddressMapElement.href = `https://www.google.com/maps/place/${lat},${lng}`
@@ -43,18 +48,17 @@ async function renderUser() {
     userPhoneElement.textContent = `Phone number: ${phone}`
 
     const spanElement = document.createElement('span')
-    spanElement.textContent = `Website:`
+    spanElement.textContent = `Website: `
     const userWebsiteElement = document.createElement('a')
     userWebsiteElement.classList.add('user-website')
-    userWebsiteElement.textContent = ` ${website}`
+    userWebsiteElement.textContent = `${website}`
     userWebsiteElement.href = '#'
-    userWebsiteElement.prepend(spanElement)
 
     const userCompanyNameElement = document.createElement('p')
     userCompanyNameElement.classList.add('user-company-name')
     userCompanyNameElement.textContent = `Company name: ${companyName}`
 
-    userInfoElement.append(userNameElement, userNickNameElement, userEmailElement, userAddressElement, userAddressMapElement, userPhoneElement, userWebsiteElement, userCompanyNameElement)
+    userInfoElement.append(userNameElement, userNickNameElement, userEmailElement, userAddressElement, addressSpanElement, userAddressMapElement, userPhoneElement, spanElement, userWebsiteElement, userCompanyNameElement)
 
     pageContent.append(userInfoElement)
     const userPostWrapper = document.createElement('div')
@@ -77,10 +81,6 @@ async function renderUser() {
         userPostLink.classList.add('user-post-link')
         userPostLink.textContent = `${title}`
         userPostLink.href = `./post.html?post_id=${post.id}`
-        
-        // const userPostId = document.createElement('span')
-        // userPostId.classList.add('user-post-id')
-        // userPostId.textContent = `${id}`
 
         userPostTitle.append(userPostLink)
         userPostList.append(userPostTitle)

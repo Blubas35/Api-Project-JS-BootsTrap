@@ -1,5 +1,5 @@
 import { createPageMainHeader } from "./header.js"
-// import { firstLetterUpperCase } from "./function.js"
+import { firstLetterUpperCase } from "./function.js"
 
 async function init() {
     const pageContent = document.querySelector('#page-content')
@@ -18,7 +18,7 @@ async function init() {
 
     const postsTitle = document.createElement('h2')
     postsTitle.classList.add('posts-title')
-    postsTitle.textContent = title
+    postsTitle.textContent = firstLetterUpperCase(title)
 
     const postsAuthor = document.createElement('h3')
     postsAuthor.classList.add('posts-author')
