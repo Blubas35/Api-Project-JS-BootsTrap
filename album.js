@@ -13,7 +13,6 @@ async function init() {
 
     let { title, photos, user } = album
 
-
     const albumWrapper = document.createElement('div')
     albumWrapper.classList.add('album-wrapper')
 
