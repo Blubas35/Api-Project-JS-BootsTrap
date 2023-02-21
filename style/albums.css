@@ -1,0 +1,35 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+#page-content {
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 70px;
+
+}
+
+a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+.album-text {
+    margin-left: 15px;
+}
+
+.album-item {
+    margin-bottom: 15px;
+}
+
+.album-text:hover {
+
+    text-decoration: underline;
+}

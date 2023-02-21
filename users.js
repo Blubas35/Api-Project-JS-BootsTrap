@@ -6,11 +6,17 @@ async function init() {
 
     const pageContent = document.querySelector('#page-content')
     const usersList = createListElement(users)
-    pageContent.append(usersList)
+    const usersListTitle = document.createElement('h2')
+    usersListTitle.classList.add('users-list-title')
+    usersListTitle.textContent = 'Featured users list'
+
+    pageContent.append(usersListTitle, usersList)
     pageContent.before(createPageMainHeader());
 }
 
 function createListElement (users) {
+
+
     const usersList = document.createElement('ul')
     usersList.classList.add('users-list', 'data-list')
 
@@ -21,7 +27,7 @@ function createListElement (users) {
         userItem.classList.add('user-item')
         const userLink = document.createElement('a')
         userLink.href = `./user.html?user_id=${user.id}`
-        userLink.textContent = `${userName} (${postCount})`
+        userLink.textContent = `${userName} (Post count: ${postCount})`
 
         userItem.append(userLink)
         usersList.append(userItem)

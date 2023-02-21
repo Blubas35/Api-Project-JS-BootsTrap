@@ -20,6 +20,11 @@ async function init() {
 function createAlbumsListElement(albums) {
     const albumsList = document.createElement('div');
     albumsList.classList.add('albums-list');
+    const albumsListTitle = document.createElement('h2') 
+    albumsListTitle.classList.add('albums-title')
+    albumsListTitle.textContent = 'Featured albums:'
+
+    albumsList.append(albumsListTitle)
 
     albums.map(album => {
         const albumItem = createAlbumItemElement(album);
@@ -46,10 +51,16 @@ function createAlbumItemElement(album) {
     photoElement.src = randomPhoto.thumbnailUrl;
     photoElement.title = randomPhoto.title;
 
-    const albumTitle = document.createElement('h2');
-    albumTitle.textContent = `${title} (${photosNumber}), author: ${name}`;
+    const albumText = document.createElement('div')
+    albumText.classList.add('album-text')
+    const albumTitle = document.createElement('h3');
+    albumTitle.textContent = `${title} (${photosNumber}). `;
+    const spanElement = document.createElement('span')
+    spanElement.textContent = `Author: ${name}`
 
-    albumItemLink.append(albumTitle, photoElement,);
+    albumText.append(albumTitle, spanElement)
+
+    albumItemLink.append(photoElement, albumText);
     albumItem.append(albumItemLink);
 
     return albumItem;

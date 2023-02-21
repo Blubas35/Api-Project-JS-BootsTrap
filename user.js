@@ -1,6 +1,8 @@
-const pageContent = document.querySelector('#page-content')
+import { createPageMainHeader } from "./header.js"
 
 async function renderUser() {
+    const pageContent = document.querySelector('#page-content')
+    pageContent.before(createPageMainHeader())
     
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
