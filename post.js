@@ -1,5 +1,6 @@
 import { createPageMainHeader } from "./header.js"
-import { firstLetterUpperCase } from "./function.js"
+import { fetchData, firstLetterUpperCase } from "./function.js"
+import { API_URL } from "./config.js"
 
 async function init() {
     const pageContent = document.querySelector('#page-content')
@@ -11,7 +12,7 @@ async function init() {
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}?_expand=user&_embed=comments`)
     const posts = await res.json()
     
-    let { title, body, comments, userId } = posts
+    let { title, body, comments, userId} = posts
 
     const postsWrapper = document.createElement('div')
     postsWrapper.classList.add('posts-Wrapper')
@@ -32,6 +33,10 @@ async function init() {
     postBody.classList.add('post-body')
     postBody.textContent = firstLetterUpperCase(body)
 
+    const postEditLink = document.createElement('a')
+    postEditLink.textContent = 'Edit Post'
+    postEditLink.href = `./edit-post.html?post_id=${id}`
+
     postsAuthor.append(postAuthorLink)
 
     const commentsWrapper = document.createElement('div')
@@ -46,7 +51,7 @@ async function init() {
 
     comments.map(comment => {
 
-        let { body, email, name } = comment
+        let { body, email, name, id } = comment
 
         const commentItem = document.createElement('li')
         commentItem.classList.add('comment-item')
@@ -64,7 +69,18 @@ async function init() {
         commentEmail.textContent = `${email}`
         commentEmail.href = '#'
 
-        commentItem.append(commentTitle, commentBody, commentEmail)
+        const removeButton = document.createElement('button')
+        removeButton.classList.add('remove-button')
+        removeButton.textContent = 'Remove'
+
+        removeButton.addEventListener('click', ()=> {
+            fetchData(`${API_URL}/comments/${id}`, {
+                method: 'DELETE'
+            })
+        })
+
+
+        commentItem.append(commentTitle, commentBody, commentEmail, removeButton)
         commentsList.append(commentItem)
         commentsWrapper.append(commentsTitle, commentsList)
     })
@@ -79,7 +95,7 @@ async function init() {
     
     otherPostsElement.append(otherPosts)
     
-    postsWrapper.append(postsTitle, postsAuthor, postBody)
+    postsWrapper.append(postsTitle, postsAuthor, postBody, postEditLink)
     pageContent.append(postsWrapper, commentsWrapper, otherPostsElement)
 }
 init()

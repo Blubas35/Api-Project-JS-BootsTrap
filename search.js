@@ -36,9 +36,11 @@ async function init() {
         console.log(searchCategory)
 
         if (searchCategory === 'posts') {
-
             await createPostElement(keyword)
-
+        } else if (searchCategory === 'albums') {
+            await createAlbumElement(keyword)
+        } else if (searchCategory === 'users') {
+            await createUserElement(keyword)
         } else {
             console.log('blogai')
         }

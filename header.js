@@ -15,7 +15,7 @@ export function createPageMainHeader(showCategories = true) {
   if (!showCategories) {
     const selectElement = document.createElement('select')
     selectElement.classList.add('select-element')
-    const optionArr = ['posts', 'users', 'comments', 'albums', 'photos']
+    const optionArr = ['posts', 'users', 'albums']
 
     createOptionElement(optionArr, selectElement)
     form.append(selectElement)
