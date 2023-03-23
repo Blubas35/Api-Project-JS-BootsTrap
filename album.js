@@ -10,7 +10,7 @@ async function init() {
 
     const res = await fetch(`https://jsonplaceholder.typicode.com/albums/${id}?_expand=user&_embed=photos`)
     const album = await res.json()
-
+    
     let { title, photos, user } = album
 
     const albumWrapper = document.createElement('div')

@@ -9,8 +9,7 @@ async function init() {
     const urlParams = new URLSearchParams(queryParams)
     const id = urlParams.get('post_id')
 
-    const res = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}?_expand=user&_embed=comments`)
-    const posts = await res.json()
+    const posts = await fetchData(`${API_URL}/posts/${id}?_expand=user&_embed=comments`)
     
     let { title, body, comments, userId} = posts
 
@@ -26,7 +25,7 @@ async function init() {
 
     const postAuthorLink = document.createElement('a')
     postAuthorLink.classList.add('post-author-link')
-    postAuthorLink.textContent = `${posts.user.name}`
+    postAuthorLink.textContent = `Written by: ${posts.user.name}`
     postAuthorLink.href = `./user.html?user_id=${userId}`
 
     const postBody = document.createElement('p')
@@ -64,6 +63,13 @@ async function init() {
         commentBody.classList.add('comment-body')
         commentBody.textContent = firstLetterUpperCase(body)
 
+        const authorWrapperElement = document.createElement('div')
+        authorWrapperElement.classList.add('author-wrapper')
+
+        const spanElement = document.createElement('span')
+        spanElement.classList.add('span-element')
+        spanElement.textContent ='Written by: '
+
         const commentEmail = document.createElement('a')
         commentEmail.classList.add('comment-email')
         commentEmail.textContent = `${email}`
@@ -73,14 +79,15 @@ async function init() {
         removeButton.classList.add('remove-button')
         removeButton.textContent = 'Remove'
 
+        authorWrapperElement.append(spanElement, commentEmail, removeButton)
+
         removeButton.addEventListener('click', ()=> {
             fetchData(`${API_URL}/comments/${id}`, {
                 method: 'DELETE'
             })
         })
 
-
-        commentItem.append(commentTitle, commentBody, commentEmail, removeButton)
+        commentItem.append(commentTitle, commentBody, authorWrapperElement)
         commentsList.append(commentItem)
         commentsWrapper.append(commentsTitle, commentsList)
     })

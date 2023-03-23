@@ -10,7 +10,6 @@ async function init() {
 
 
     const users = await fetchData(`${API_URL}/users`)
-    console.log(users)
 
     users.map(user => {
         console.log(user.name)

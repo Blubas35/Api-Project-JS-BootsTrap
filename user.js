@@ -1,4 +1,5 @@
 import { createPageMainHeader } from "./header.js"
+import { firstLetterUpperCase } from "./function.js"
 
 async function renderUser() {
     const pageContent = document.querySelector('#page-content')
@@ -18,6 +19,10 @@ async function renderUser() {
 
     const userInfoElement = document.createElement('div')
     userInfoElement.classList.add('user-wrapper')
+
+    const userInfoTitle = document.createElement('h2')
+    userInfoTitle.classList.add('user-info-title')
+    userInfoTitle.textContent = `Users ${name} (Id: ${id}) information:`
 
     const userNameElement = document.createElement('p')
     userNameElement.classList.add('user-name')
@@ -60,7 +65,7 @@ async function renderUser() {
     userCompanyNameElement.classList.add('user-company-name')
     userCompanyNameElement.textContent = `Company name: ${companyName}`
 
-    userInfoElement.append(userNameElement, userNickNameElement, userEmailElement, userAddressElement, addressSpanElement, userAddressMapElement, userPhoneElement, spanElement, userWebsiteElement, userCompanyNameElement)
+    userInfoElement.append(userInfoTitle, userNameElement, userNickNameElement, userEmailElement, userAddressElement, addressSpanElement, userAddressMapElement, userPhoneElement, spanElement, userWebsiteElement, userCompanyNameElement)
 
     pageContent.append(userInfoElement)
     const userPostWrapper = document.createElement('div')
@@ -68,7 +73,7 @@ async function renderUser() {
 
     const userPostListTitle = document.createElement('h2')
     userPostListTitle.classList.add('post-list-title')
-    userPostListTitle.textContent = 'User Posts'
+    userPostListTitle.textContent = `${name} Posts:`
 
     const userPostList = document.createElement('ul')
     userPostList.classList.add('user-post-list')
@@ -81,7 +86,7 @@ async function renderUser() {
 
         const userPostLink = document.createElement('a')
         userPostLink.classList.add('user-post-link')
-        userPostLink.textContent = `${title}`
+        userPostLink.textContent = `${firstLetterUpperCase(title)}`
         userPostLink.href = `./post.html?post_id=${post.id}`
 
         userPostTitle.append(userPostLink)
@@ -95,7 +100,7 @@ async function renderUser() {
 
     const userAlbumListTitle = document.createElement('h2')
     userAlbumListTitle.classList.add('post-list-title')
-    userAlbumListTitle.textContent = 'User Albums'
+    userAlbumListTitle.textContent = `${name} Albums:`
 
     const userAlbumList = document.createElement('ul')
     userPostList.classList.add('user-post-list')
@@ -103,10 +108,10 @@ async function renderUser() {
     albums.map(album => {
         const userAlbumTitle = document.createElement('li')
         userAlbumTitle.classList.add('user-album-title')
-        console.log(album)
+
         const userAlbumLink = document.createElement('a')
         userAlbumLink.classList.add('album-link')
-        userAlbumLink.textContent = `${album.title}`
+        userAlbumLink.textContent = `${firstLetterUpperCase(album.title)}`
         userAlbumLink.href = `./album.html?album_id=${album.id}`
 
         userAlbumTitle.append(userAlbumLink)

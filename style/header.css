@@ -1,11 +1,11 @@
-*,
+/* *,
 *::before,
 *::after {
     box-sizing: border-box;
 }
 
 body {
-    background-image: url(images/pexels-gradienta-7135053.jpg);
+    background-image: url('./images/pexels-gradienta-7135053.jpg');
 }
 
 .container {
@@ -53,4 +53,4 @@ body {
 
 a {
     text-decoration: none;
-}
+} */

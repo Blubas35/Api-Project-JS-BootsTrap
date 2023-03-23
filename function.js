@@ -3,7 +3,7 @@ export function firstLetterUpperCase (str) {
 }
 
 export async function fetchData(url, param) {
-    const res = await fetch(url)
+    const res = await fetch(url, param)
     const data= await res.json()
 
     return data

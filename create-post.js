@@ -7,11 +7,8 @@ async function init() {
     const submitButton = createPostForm.submit
 
     const users = await fetchData(`${API_URL}/users`)
-    console.log(users)
 
     users.map(user => {
-        console.log(user.name)
-        console.log(user.id)
 
         const userOptionElement = document.createElement('option')
         userOptionElement.textContent = user.name

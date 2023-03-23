@@ -6,15 +6,11 @@ async function init() {
 
     const pageContent = document.querySelector('#page-content')
     const searchWord = getParams('search')
-    console.log(searchWord)
 
     pageContent.before(createPageMainHeader(false));
 
     const resultWrapper = document.createElement('div')
     resultWrapper.classList.add('result-wrapper')
-
-    // cia prie romano kodo
-    // const allSearchResults = await renderAllSearchResults(searchWord);
 
     const selectElement = document.querySelector('.select-element')
     const submitButton = document.querySelector('.submit-button')
@@ -32,9 +28,6 @@ async function init() {
         const previousResults = document.querySelectorAll('.previous')
         previousResults.forEach(result => result.remove())
 
-        console.log(keyword)
-        console.log(searchCategory)
-
         if (searchCategory === 'posts') {
             await createPostElement(keyword)
         } else if (searchCategory === 'albums') {
@@ -46,96 +39,8 @@ async function init() {
         }
     })
 
-    // /posts?q=internet
-    // /users?q=al
-
-    // romano koda bandziau
-
-    // function searchResults(searchArr, searchCategory) {
-    //     const resultWrapper = document.createElement('div')
-    //     resultWrapper.classList.add('result-wrapper')
-
-    //     const searchResultTitle = document.createElement('h2')
-    //     searchResultTitle.textContent = 'results found: '
-
-    //     resultWrapper.append(searchResultTitle)
-
-    //     if (searchArr.length === 0) {
-    //         searchResultTitle.textContent = `No ${searchCategory}...`
-    //         return resultWrapper
-    //     }
-
-    //     searchResultTitle.textContent = `${searchCategory} ${searchArr.length}:`
-
-    //     const searchList = document.createElement('ul')
-    //     searchList.classList.add('search-list')
-
-    //     resultWrapper.append(searchList)
-
-    //     searchArr.map(item => {
-    //         const searchItem = document.createElement('li')
-    //         searchItem.classList.add('search-item')
-
-    //         const searchLink = document.createElement('a')
-    //         searchLink.classList.add('search-link')
-    //         searchLink.text = item.title
-    //         searchLink.href = item.path
-
-    //         searchItem.append(searchLink)
-    //         searchList.append(searchItem)
-    //     })
-    //     return resultWrapper
-    // }
-
-    // async function renderAllSearchResults(searchWord) {
-    //     const allSearchResults = document.createElement('div')
-    //     allSearchResults.classList.add('all-search-results')
-
-    //     if (!searchWord) {
-    //         console.log('error paieskos fraze')
-    //         return
-    //     }
-
-    //     const users = await fetchData(`${API_URL}/users?q=${searchWord}`)
-    //     const posts = await fetchData(`${API_URL}/posts?q=${searchWord}&_expand=user`)
-    //     const albums = await fetchData(`${API_URL}/albums?q=${searchWord}&_expand=user`)
-    //     console.log(users)
-    //     const usersSearchData = users.map(user => {
-    //         // const userData = {
-    //         //     title: user.title,
-    //         //     path: `./user.html?user_id=` + user.id,
-    //         // }
-
-    //         return userData
-    //     })
-    //     const postsSearchData = posts.map(post => {
-    //         const postData = {
-    //             title: post.title,
-    //             path: `./post.html?post=` + post.id,
-    //         }
-
-    //         return postData
-    //     })
-    //     const albumsSearchData = albums.map(album => {
-    //         const albumData = {
-    //             title: album.title,
-    //             path: `./album.html?album_id=` + album.id,
-    //         }
-
-    //         return albumData
-    //     })
-
-    //     const searchUsers = searchResults(usersSearchData, 'user')
-    //     const searchPosts = searchResults(usersSearchData, 'post')
-    //     const searchAlbum = searchResults(usersSearchData, 'album')
-
-    //     allSearchResults.append(searchUsers, postsSearchData, albumsSearchData)
-
-    //     return allSearchResults
-    // }
     async function createUserElement(word) {
-        const res = await fetch(`https://jsonplaceholder.typicode.com/users?q=${word}`)
-        const userResults = await res.json()
+        const userResults = await fetchData(`${API_URL}/users?q=${word}`)
 
         const usersFound = userResults.length
         const userResultWrapper = document.createElement('div')
@@ -168,8 +73,7 @@ async function init() {
 
     async function createPostElement(word) {
 
-        const resPost = await fetch(`https://jsonplaceholder.typicode.com/posts?q=${word}&_expand=user`)
-        const resultsPosts = await resPost.json()
+        const resultsPosts = await fetchData(`${API_URL}/posts?q=${word}&_limit=10&_expand=user`)
 
         const postsFound = resultsPosts.length
         const postResultWrapper = document.createElement('div')
@@ -177,8 +81,6 @@ async function init() {
         const postResultTitle = document.createElement('h3')
         postResultTitle.classList.add('post-result-title')
         postResultTitle.textContent = `${postsFound} Posts found with keyword '${word}': `
-
-        console.log(resultsPosts)
 
         postResultWrapper.prepend(postResultTitle)
         const postList = document.createElement('ul')
@@ -216,8 +118,7 @@ async function init() {
 
     async function createAlbumElement(word) {
 
-        const resAlbum = await fetch(`https://jsonplaceholder.typicode.com/albums?q=${word}&_expand=user`)
-        const resultsAlbums = await resAlbum.json()
+        const resultsAlbums = await fetchData(`${API_URL}/albums?q=${word}&_limit=10&_expand=user`)
 
         const albumsFound = resultsAlbums.length
         const albumsResultWrapper = document.createElement('div')
