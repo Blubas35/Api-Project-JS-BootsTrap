@@ -29,8 +29,12 @@ async function init() {
     mainContent.classList.add('main-content')
     const divElement = document.createElement('div')
     divElement.classList.add('row')
+    const userPostDiv = document.createElement('div')
+    userPostDiv.classList.add('col-xl-4')
+    const divElement2 = document.createElement('div')
+    divElement2.classList.add('d-flex', 'flex-column', 'gap-5')
     const userElement = document.createElement('div')
-    userElement.classList.add('user-wrapper', 'col-xl-4')
+    userElement.classList.add('user-wrapper', 'mx-auto')
     const postElement = document.createElement('div')
     postElement.classList.add('post-wrapper')
     const albumsElement = document.createElement('div')
@@ -43,6 +47,11 @@ async function init() {
     const carouselItem1 = document.querySelector('#carousel-item-1')
     const carouselItem2 = document.querySelector('#carousel-item-2')
     const carouselItem3 = document.querySelector('#carousel-item-3')
+    const carouselWrapper = document.querySelector('#SimpleCarouselExample')
+
+    
+    divElement2.append(carouselWrapper, userElement)
+    userPostDiv.append(divElement2)
 
     async function createUserElement() {
         const userResults = await fetchData(`${API_URL}/users?_limit=5`)
@@ -81,83 +90,46 @@ async function init() {
         // postResultTitle.classList.add('post-result-title')
         // postResultTitle.textContent = `Top posts of the month: `
         carouselTitle.textContent = `Top posts of the month:`
+        carouselTitle.classList.add('px-4', 'mx-auto')
 
         console.log(resultsPosts)
         postElement.prepend(postResultTitle)
         const postList = document.createElement('ul')
         postList.classList.add('post-list')
 
-        // const topPostWrapper = document.createElement('div')
-        // topPostWrapper.classList.add('top-post-wrapper')
-        // const topPostLink = document.createElement('a')
-        // topPostLink.classList.add('top-post-link')
-        // topPostLink.href = `./post.html?post_id=${resultsPosts[0].id}`
-        // const title1 = document.createElement('h3')
-        // title1.textContent = resultsPosts[0].title
-        // title1.classList.add('top-post-title')
-        // console.log(resultsPosts)
-
-        // const topPostWrapper2 = document.createElement('div')
-        // topPostWrapper2.classList.add('top-post-wrapper')
-        // const topPostLink2 = document.createElement('a')
-        // topPostLink2.classList.add('top-post-link')
-        // topPostLink2.href = `./post.html?post_id=${resultsPosts[1].id}`
-        // const title12 = document.createElement('h3')
-        // title12.textContent = resultsPosts[1].title
-        // title12.classList.add('top-post-title')
-
-        // const topPostWrapper23 = document.createElement('div')
-        // topPostWrapper23.classList.add('top-post-wrapper')
-        // const topPostLink23 = document.createElement('a')
-        // topPostLink23.classList.add('top-post-link')
-        // topPostLink23.href = `./post.html?post_id=${resultsPosts[2].id}`
-        // const title123 = document.createElement('h3')
-        // title123.textContent = resultsPosts[2].title
-        // title123.classList.add('top-post-title')
-
-        // topPostLink.append(title1)
-        // topPostWrapper.append(topPostLink)
-        // carouselItem1.append(topPostWrapper)
-
-        // topPostLink2.append(title12)
-        // topPostWrapper2.append(topPostLink2)
-        // carouselItem2.append(topPostWrapper2)
-
-        // topPostLink23.append(title123)
-        // topPostWrapper23.append(topPostLink23)
-        // carouselItem3.append(topPostWrapper23)
-
         const carouselItemArr = [carouselItem1, carouselItem2, carouselItem3]
         for (let i = 0; i < carouselItemArr.length; i++) {
             const topPost = resultsPosts[i]
-            const topPostLink = createTopPostLink(topPost)
+            const topPostLink = createTopPostLink(topPost, i)
             const topPostWrapper = createTopPostWrapper(topPostLink)
             carouselItemArr[i].append(topPostWrapper)
         }
+
+
         resultsPosts.forEach(post => {
-            const id = post.id
-            const userId = post.userId
-            const title = post.title
-            const comments = post.comments
+            // const id = post.id
+            // const userId = post.userId
+            // const title = post.title
+            // const comments = post.comments
 
-            const postItem = document.createElement('li')
-            postItem.classList.add('post-item')
+            // const postItem = document.createElement('li')
+            // postItem.classList.add('post-item')
 
-            const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link')
-            resultLink.textContent = firstLetterUpperCase(title)
-            resultLink.href = `./post.html?post_id=${id}`
+            // const resultLink = document.createElement('a')
+            // resultLink.classList.add('result-link')
+            // resultLink.textContent = firstLetterUpperCase(title)
+            // resultLink.href = `./post.html?post_id=${id}`
 
-            const postItemDescription = document.createElement('span')
-            postItemDescription.classList.add('post-item-description')
-            postItemDescription.textContent = `. Written by: `
+            // const postItemDescription = document.createElement('span')
+            // postItemDescription.classList.add('post-item-description')
+            // postItemDescription.textContent = `. Written by: `
 
-            const postItemDescriptionLink = document.createElement('a')
-            postItemDescriptionLink.textContent = post.user.name
-            postItemDescriptionLink.href = `./user.html?user_id=${userId}`
+            // const postItemDescriptionLink = document.createElement('a')
+            // postItemDescriptionLink.textContent = post.user.name
+            // postItemDescriptionLink.href = `./user.html?user_id=${userId}`
 
-            postItem.append(resultLink, postItemDescription, postItemDescriptionLink)
-            postList.append(postItem)
+            // postItem.append(resultLink, postItemDescription, postItemDescriptionLink)
+            // postList.append(postItem)
             // carouselItem1.append(postItem)
         })
 
@@ -177,7 +149,7 @@ async function init() {
         albumsResultTitle.classList.add('post-result-title')
         albumsResultTitle.textContent = `Most popular albums: `
         const albumList = document.createElement('ul')
-        albumList.classList.add('album-list')
+        albumList.classList.add('album-list', 'list-unstyled', 'row', 'gap-3')
 
         albumsElement.prepend(albumsResultTitle)
 
@@ -189,16 +161,21 @@ async function init() {
             const photosArr = album.photos
 
             const albumItem = document.createElement('li')
-            albumItem.classList.add('album-item')
+            albumItem.classList.add('album-item', 'd-flex', 'flex-column', 'col', 'gap-3', 'pb-2', 'justify-content-between')
 
             const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link')
-            resultLink.textContent = firstLetterUpperCase(title)
+            resultLink.classList.add('result-link', 'd-flex', 'flex-column','align-items-start', 'gap-3')
+            const albumTitleElement = document.createElement('span')
+            albumTitleElement.textContent = firstLetterUpperCase(title)
+            albumTitleElement.classList.add('w-100', 'text-truncate')
             resultLink.href = `./album.html?album_id=${id}`
+            resultLink.style.maxWidth = '200px'
 
+            const albumItemDescriptionWrapper = document.createElement('div')
+            albumItemDescriptionWrapper.classList.add('div')
             const albumItemDescription = document.createElement('span')
             albumItemDescription.classList.add('album-item-description')
-            albumItemDescription.textContent = `. Made by: `
+            albumItemDescription.textContent = `Made by: `
 
             const albumItemDescriptionLink = document.createElement('a')
             albumItemDescriptionLink.textContent = name
@@ -209,15 +186,16 @@ async function init() {
             photosArr.map(photo => {
                 imageWrapper.src = `${photo.thumbnailUrl}`
             })
-            resultLink.append(imageWrapper)
-            albumItem.append(resultLink, albumItemDescription, albumItemDescriptionLink)
+            albumItemDescriptionWrapper.append(albumItemDescription, albumItemDescriptionLink)
+            resultLink.append(albumTitleElement, imageWrapper)
+            albumItem.append(resultLink, albumItemDescriptionWrapper)
             albumList.append(albumItem)
 
             albumsElement.append(albumList)
         })
     }
     await createAlbumElement()
-    divElement.append(albumsElement, userElement)
+    divElement.append(albumsElement, userPostDiv)
     mainContent.append(postElement, divElement)
     container.append(mainContent)
     pageContent.append(container)

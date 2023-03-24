@@ -17,13 +17,14 @@ export function getParams(param) {
     return value
 }
 
-export function createTopPostLink(post) {
+export function createTopPostLink(post, index) {
     const topPostLink = document.createElement('a')
     topPostLink.classList.add('top-post-link')
     topPostLink.href = `./post.html?post_id=${post.id}`
     const title = document.createElement('h3')
-    title.textContent = post.title
-    title.classList.add('top-post-title')
+    const postNr = index + 1
+    title.textContent = `${postNr}.  ${firstLetterUpperCase(post.title)}`
+    title.classList.add('top-post-title', 'fs-5', 'px-4', 'mx-auto')
     topPostLink.append(title)
 
     return topPostLink
@@ -31,7 +32,7 @@ export function createTopPostLink(post) {
 
 export function createTopPostWrapper(topPostLink) {
     const topPostWrapper = document.createElement('div')
-    topPostWrapper.classList.add('top-post-wrapper')
+    topPostWrapper.classList.add('top-post-wrapper', 'px-4' )
 
     topPostWrapper.append(topPostLink)
 

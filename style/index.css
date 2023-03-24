@@ -5,3 +5,28 @@
 .masthead {
     height: 300px;
 }
+
+.carousel-control-next, .carousel-control-prev {
+    top: 113%;
+}
+.carousel-control-next {
+    right: -1%;
+}
+.carousel-control-prev {
+    left: 61%;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+  }
+  
+  .carousel-control-prev {
+    left: 0;
+  }
+  
+  .carousel-control-next {
+    right: 0;
+  }
