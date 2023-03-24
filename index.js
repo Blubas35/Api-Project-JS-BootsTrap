@@ -1,6 +1,6 @@
 import { createPageMainHeader } from "./header.js";
 import { API_URL } from "./config.js";
-import { firstLetterUpperCase, fetchData } from "./function.js";
+import { firstLetterUpperCase, fetchData, createTopPostLink, createTopPostWrapper } from "./function.js";
 
 
 async function init() {
@@ -87,16 +87,58 @@ async function init() {
         const postList = document.createElement('ul')
         postList.classList.add('post-list')
 
-        document.creat
+        // const topPostWrapper = document.createElement('div')
+        // topPostWrapper.classList.add('top-post-wrapper')
+        // const topPostLink = document.createElement('a')
+        // topPostLink.classList.add('top-post-link')
+        // topPostLink.href = `./post.html?post_id=${resultsPosts[0].id}`
+        // const title1 = document.createElement('h3')
+        // title1.textContent = resultsPosts[0].title
+        // title1.classList.add('top-post-title')
+        // console.log(resultsPosts)
 
-        carouselItem1.append(resultsPosts[0].title)
+        // const topPostWrapper2 = document.createElement('div')
+        // topPostWrapper2.classList.add('top-post-wrapper')
+        // const topPostLink2 = document.createElement('a')
+        // topPostLink2.classList.add('top-post-link')
+        // topPostLink2.href = `./post.html?post_id=${resultsPosts[1].id}`
+        // const title12 = document.createElement('h3')
+        // title12.textContent = resultsPosts[1].title
+        // title12.classList.add('top-post-title')
 
+        // const topPostWrapper23 = document.createElement('div')
+        // topPostWrapper23.classList.add('top-post-wrapper')
+        // const topPostLink23 = document.createElement('a')
+        // topPostLink23.classList.add('top-post-link')
+        // topPostLink23.href = `./post.html?post_id=${resultsPosts[2].id}`
+        // const title123 = document.createElement('h3')
+        // title123.textContent = resultsPosts[2].title
+        // title123.classList.add('top-post-title')
+
+        // topPostLink.append(title1)
+        // topPostWrapper.append(topPostLink)
+        // carouselItem1.append(topPostWrapper)
+
+        // topPostLink2.append(title12)
+        // topPostWrapper2.append(topPostLink2)
+        // carouselItem2.append(topPostWrapper2)
+
+        // topPostLink23.append(title123)
+        // topPostWrapper23.append(topPostLink23)
+        // carouselItem3.append(topPostWrapper23)
+
+        const carouselItemArr = [carouselItem1, carouselItem2, carouselItem3]
+        for (let i = 0; i < carouselItemArr.length; i++) {
+            const topPost = resultsPosts[i]
+            const topPostLink = createTopPostLink(topPost)
+            const topPostWrapper = createTopPostWrapper(topPostLink)
+            carouselItemArr[i].append(topPostWrapper)
+        }
         resultsPosts.forEach(post => {
             const id = post.id
             const userId = post.userId
             const title = post.title
             const comments = post.comments
-
 
             const postItem = document.createElement('li')
             postItem.classList.add('post-item')
