@@ -23,8 +23,6 @@ export function createPageMainHeader(showCategories = true) {
   const form = document.createElement('form')
   form.classList.add('form')
 
-
-
   // const header = document.createElement('header');
   // header.classList.add('main-header', 'container', 'row')
   // const imageWrapper = document.createElement('div')

@@ -2,7 +2,6 @@ import { createPageMainHeader } from "./header.js";
 import { API_URL } from "./config.js";
 import { firstLetterUpperCase, fetchData, createTopPostLink, createTopPostWrapper } from "./function.js";
 
-
 async function init() {
     const pageContent = document.querySelector('#page-content');
 
@@ -71,8 +70,9 @@ async function init() {
 
             const userProfilePic = document.createElement('img')
             userProfilePic.src = './images/user-profile.png'
+            userProfilePic.classList.add('user-profile-pic')
             const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link')
+            resultLink.classList.add('result-link', 'd-flex', 'flex-row-reverse', 'justify-content-end')
             resultLink.textContent = firstName
             resultLink.href = `./user.html?user_id=${id}`
 
@@ -149,7 +149,7 @@ async function init() {
         albumsResultTitle.classList.add('post-result-title')
         albumsResultTitle.textContent = `Most popular albums: `
         const albumList = document.createElement('ul')
-        albumList.classList.add('album-list', 'list-unstyled', 'row', 'gap-3')
+        albumList.classList.add('album-list', 'row', 'gap-3')
 
         albumsElement.prepend(albumsResultTitle)
 
@@ -182,6 +182,7 @@ async function init() {
             albumItemDescriptionLink.href = `./user.html?user_id=${userId}`
 
             const imageWrapper = document.createElement('img')
+            imageWrapper.classList.add('album-pic')
 
             photosArr.map(photo => {
                 imageWrapper.src = `${photo.thumbnailUrl}`

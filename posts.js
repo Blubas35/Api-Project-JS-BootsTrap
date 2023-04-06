@@ -13,7 +13,7 @@ async function init() {
     const postsList = createPostsListElement(posts);
 
     const postsTitle = document.createElement('h2')
-    postsTitle.classList.add('posts-title')
+    postsTitle.classList.add('posts-title', 'p-5', 'fs-1', 'text-dark', 'fw-bolder')
     postsTitle.textContent = 'Featured posts'
 
     pageContent.append(postsTitle, postsList);
@@ -29,17 +29,31 @@ async function init() {
       const userName = post.user.name;
       
       const postItem = document.createElement('li');
-      postItem.classList.add('post-item');
+      postItem.classList.add('post-item', 'w-50', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'row', 'row-gap-2');
       
       const postLink = document.createElement('a');
       postLink.textContent = firstLetterUpperCase(post.title);
       postLink.href = './post.html?post_id=' + post.id;
+      postLink.classList.add('order-2', 'fs-4', 'text-decoration-none', 'text-dark', 'fw-bolder')
   
       const postAuthor = document.createElement('a');
       postAuthor.textContent = ` ${userName}`;
       postAuthor.href = './user.html?user_id=' + post.userId;
+      postAuthor.classList.add('text-decoration-none', 'text-secondary')
+
+      const spanElement = document.createElement('span')
+      spanElement.textContent = 'Posted by: '
+      spanElement.classList.add('text-secondary')
+
+      const authorWrapper = document.createElement('div')
+      authorWrapper.classList.add('author-wrapper', 'order-1')
+
+      const postBody = document.createElement('p')
+      postBody.textContent = firstLetterUpperCase(post.body)
+      postBody.classList.add('order-3', 'fs-5', 'fw-lighter')
   
-      postItem.append(postLink, '. By: ', postAuthor);
+      authorWrapper.append(spanElement, postAuthor)
+      postItem.append(postLink, postBody, authorWrapper);
   
       postsList.append(postItem);
     })

@@ -14,29 +14,34 @@ async function init() {
     let { title, body, comments, userId} = posts
 
     const postsWrapper = document.createElement('div')
-    postsWrapper.classList.add('posts-Wrapper')
+    postsWrapper.classList.add('posts-Wrapper', 'row')
 
     const postsTitle = document.createElement('h2')
-    postsTitle.classList.add('posts-title')
+    postsTitle.classList.add('posts-title', 'order-2')
     postsTitle.textContent = firstLetterUpperCase(title)
 
     const postsAuthor = document.createElement('h3')
-    postsAuthor.classList.add('posts-author')
+    postsAuthor.classList.add('posts-author', 'order-1', 'fs-6')
 
     const postAuthorLink = document.createElement('a')
-    postAuthorLink.classList.add('post-author-link')
-    postAuthorLink.textContent = `Written by: ${posts.user.name}`
+    postAuthorLink.classList.add('post-author-link', 'text-secondary', 'text-decoration-none')
+    postAuthorLink.textContent = `${posts.user.name}`
     postAuthorLink.href = `./user.html?user_id=${userId}`
+    const spanElement = document.createElement('span')
+    spanElement.textContent ='Posted by: '
+    spanElement.classList.add('text-secondary')
 
     const postBody = document.createElement('p')
-    postBody.classList.add('post-body')
+    postBody.classList.add('post-body', 'order-3')
     postBody.textContent = firstLetterUpperCase(body)
 
     const postEditLink = document.createElement('a')
     postEditLink.textContent = 'Edit Post'
     postEditLink.href = `./edit-post.html?post_id=${id}`
+    postEditLink.classList.add('order-4')
 
-    postsAuthor.append(postAuthorLink)
+
+    postsAuthor.append(spanElement, postAuthorLink)
 
     const commentsWrapper = document.createElement('div')
     commentsWrapper.classList.add('comments-wrapper')
