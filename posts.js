@@ -15,6 +15,7 @@ async function init() {
     const postsTitle = document.createElement('h2')
     postsTitle.classList.add('posts-title', 'p-5', 'fs-1', 'text-dark', 'fw-bolder')
     postsTitle.textContent = 'Featured posts'
+    pageContent.classList.add('px-6', 'px-4')
 
     pageContent.append(postsTitle, postsList);
     pageContent.before(header);
@@ -23,23 +24,29 @@ async function init() {
   function createPostsListElement(posts) {
 
     const postsList = document.createElement('ul');
-    postsList.classList.add('posts-list', 'data-list');
-  
+    postsList.classList.add('posts-list', 'data-list', 'row');
+
     posts.map(post => {
       const userName = post.user.name;
       
       const postItem = document.createElement('li');
-      postItem.classList.add('post-item', 'w-50', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'row', 'row-gap-2');
+      postItem.classList.add('post-item', 'col-12');
+      
+      const divWrapper = document.createElement('div')
+      divWrapper.classList.add('div-wrapper', 'row-md')
+
+      const divElement = document.createElement('div')
+      divElement.classList.add('shadow-sm', 'col-xl-6', 'col-lg-7', 'col-md-10', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'row', 'row-gap-2')
       
       const postLink = document.createElement('a');
       postLink.textContent = firstLetterUpperCase(post.title);
       postLink.href = './post.html?post_id=' + post.id;
-      postLink.classList.add('order-2', 'fs-4', 'text-decoration-none', 'text-dark', 'fw-bolder')
+      postLink.classList.add('post-link-title', 'order-2', 'fs-4', 'text-decoration-none', 'text-dark', 'fw-bolder')
   
       const postAuthor = document.createElement('a');
       postAuthor.textContent = ` ${userName}`;
       postAuthor.href = './user.html?user_id=' + post.userId;
-      postAuthor.classList.add('text-decoration-none', 'text-secondary')
+      postAuthor.classList.add('post-author-link', 'text-secondary')
 
       const spanElement = document.createElement('span')
       spanElement.textContent = 'Posted by: '
@@ -51,9 +58,11 @@ async function init() {
       const postBody = document.createElement('p')
       postBody.textContent = firstLetterUpperCase(post.body)
       postBody.classList.add('order-3', 'fs-5', 'fw-lighter')
-  
+
+      divWrapper.append(divElement)
       authorWrapper.append(spanElement, postAuthor)
-      postItem.append(postLink, postBody, authorWrapper);
+      divElement.append(postLink, postBody, authorWrapper);
+      postItem.append(divWrapper)
   
       postsList.append(postItem);
     })
