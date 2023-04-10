@@ -12,32 +12,16 @@ export function createPageMainHeader(showCategories = true) {
   imageWrapperAElement.textContent = 'JSON website'
 
   let logoHTML = `<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-  Menu
-  <i class="fas fa-bars"></i>
-  </button>`
+  <span class="navbar-toggler-icon"></span>
+</button>`;
+
   divContainerNavigation.innerHTML = logoHTML
 
   const divContainerMenu = document.createElement('div')
   divContainerMenu.classList.add('collapse', 'navbar-collapse', 'column-gap-3')
- 
+  divContainerMenu.id = 'navbarResponsive'
   const form = document.createElement('form')
   form.classList.add('form')
-
-  // const header = document.createElement('header');
-  // header.classList.add('main-header', 'container', 'row')
-  // const imageWrapper = document.createElement('div')
-  // imageWrapper.classList.add('image-wrapper', 'col')
-  // const mainLogo = document.createElement('img')
-  // mainLogo.classList.add('main-logo')
-  // const divElementHeader = document.createElement('div')
-  // divElementHeader.classList.add('col')
-  // const nav = document.createElement('nav');
-  // const divElementNav = document.createElement('div')
-  // divElementNav.classList.add('col')
-  // nav.classList.add('main-navigation', 'col');
-  // const form = document.createElement('form')
-  // form.classList.add('form')
-  
 
   if (!showCategories) {
     const selectElement = document.createElement('select')
@@ -83,11 +67,6 @@ export function createPageMainHeader(showCategories = true) {
     form.setAttribute('action', './search.html')
   })
 
-  // form.append(searchInput, submitButton)
-  // imageWrapper.append(mainLogo)
-  // divElementNav.append(menuList, form)
-  // nav.append(divElementNav);
-  // header.append(imageWrapper, divElementHeader, nav);
   form.append(searchInput, submitButton)
   divContainerMenu.append(menuList, form)
   divContainerNavigation.append(imageWrapperAElement, divContainerMenu)
@@ -95,7 +74,6 @@ export function createPageMainHeader(showCategories = true) {
 
 
   return navigation;
-  // return header;
 }
 
 function createOptionElement(arr, element) {

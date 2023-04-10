@@ -26,3 +26,7 @@
 .post-link-title:hover {
     opacity: 0.6;
 }
+
+.fs-7 {
+    font-size: 0.75rem;
+}

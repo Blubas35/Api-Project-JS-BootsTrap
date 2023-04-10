@@ -14,10 +14,77 @@
 
 }
 
-/* .users-list {
-    list-style-type: none;
+.wrapper {
     display: flex;
     flex-wrap: wrap;
+    gap: 20px;
+}
+
+.categories-wrapper {
+    display: flex;
     flex-direction: column;
-    row-gap: 10px;
-  } */
+    align-items: center;
+    width: 100%;
+    row-gap: 50px;
+}
+
+.user-list-categories {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    list-style-type: none;
+    padding: 0;
+    margin-top: 30px;
+}
+
+.categories-list {
+    text-align: center;
+}
+
+.users-list-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    width: 100%;
+}
+
+.users-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}
+
+.user-item {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px;
+    background-color: #f8f8f8;
+    border-radius: 5px;
+    align-items: center;
+    justify-items: center;
+}
+
+.user-photo {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.user-name,
+.email-address,
+.phone-element,
+.website-element {
+    text-decoration: none;
+    color: #333;
+    margin-left: 10px;
+}
+
+.user-name:hover,
+.email-address:hover,
+.website-element:hover,
+.phone-element:hover {
+    opacity: 0.5;
+  }

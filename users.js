@@ -4,39 +4,61 @@ async function init() {
     const res = await fetch(`https://jsonplaceholder.typicode.com/users?_embed=posts`)
     const users = await res.json()
 
+    const photoRes = await fetch(`https://randomuser.me/api/?inc=picture&results=10`)
+    const photos = await photoRes.json()
+    const photosArr = photos.results
+
     const pageContent = document.querySelector('#page-content')
-    const usersList = createListElement(users)
+    const usersList = createListElement(users, photosArr)
     const usersListTitle = document.createElement('h2')
     usersListTitle.classList.add('users-list-title')
-    usersListTitle.textContent = 'Featured users list'
+    usersListTitle.textContent = 'User information list'
+    const pageWrapper = document.createElement('div')
+    pageWrapper.classList.add('wrapper')
+    const categoriesUsersWrapper = document.createElement('div')
+    categoriesUsersWrapper.classList.add('categories-wrapper')
 
     const categories = ['Photo', 'Name', 'Email', 'Phone', 'Website']
     const categoriesList = createCategoriesList(categories)
     usersList.prepend(categoriesList)
-    pageContent.append(usersListTitle, usersList)
+    categoriesUsersWrapper.append(usersListTitle, usersList)
+    pageWrapper.append(categoriesUsersWrapper)
+    pageContent.append(pageWrapper)
+    // pageContent.append(usersListTitle, usersList)
     pageContent.before(createPageMainHeader());
     console.log(users)
 }
 
-function createListElement(users) {
+function createListElement(users, photosArr) {
     const usersListWrapper = document.createElement('div')
     usersListWrapper.classList.add('users-list-wrapper')
 
-    users.forEach(user => {
+    const usersList = document.createElement('ul')
+    usersList.classList.add('users-list', 'data-list')
 
-        let {email, phone, website} = user
+    users.forEach((user, index) => {
+        let { email, phone, website } = user
 
-        const usersList = document.createElement('ul')
-        usersList.classList.add('users-list', 'data-list')
+        const userPhotoLink = document.createElement('a')
+        userPhotoLink.classList.add('user-photo-link')
+        userPhotoLink.href = `./user.html?user_id=${user.id}`
+        const userPhotoElement = document.createElement('img')
+        userPhotoElement.classList.add('user-photo')
+
+        const photo = photosArr[index]
+        const profilePic = photo.picture.thumbnail
+
+        userPhotoElement.src = profilePic
+
         const postCount = user.posts.length
         const userName = user.name
         const userItem = document.createElement('li')
-        userItem.classList.add('user-item', 'd-flex', 'justify-content-between')
-        const userPhotoElement = document.createElement('img')
-        userPhotoElement.classList.add('user-photo')
+        userItem.classList.add('user-item')
+        // userItem.classList.add('user-item', 'd-flex', 'justify-content-between')
         const userLink = document.createElement('a')
         userLink.href = `./user.html?user_id=${user.id}`
         userLink.textContent = `${userName}`
+        userLink.classList.add('user-name')
         // const postSpanElement = document.createElement('span')
         // postSpanElement.textContent = ` (Post count: ${postCount})`
         const emailElement = document.createElement('a')
@@ -52,11 +74,13 @@ function createListElement(users) {
         websiteElement.href = `${website}`
         websiteElement.textContent = `${website}`
 
-        userItem.append(userPhotoElement, userLink, emailElement, phoneElement, websiteElement)
+        userPhotoLink.append(userPhotoElement)
+        userItem.append(userPhotoLink, userLink, emailElement, phoneElement, websiteElement)
         usersList.append(userItem)
         usersListWrapper.append(usersList)
     })
-    
+
+
     return usersListWrapper
 }
 
@@ -64,7 +88,7 @@ function createCategoriesList(categories) {
     const categoriesWrapper = document.createElement('div')
     categoriesWrapper.classList.add('categories-wrapper')
     const userListCategories = document.createElement('ul')
-    userListCategories.classList.add('user-list-categories', 'd-flex', 'justify-content-between')
+    userListCategories.classList.add('user-list-categories')
 
     categories.map(category => {
         const listCategories = document.createElement('li')

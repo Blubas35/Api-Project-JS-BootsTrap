@@ -38,3 +38,10 @@ export function createTopPostWrapper(topPostLink) {
 
     return topPostWrapper
 }
+
+export function textTruncate(text, long) {
+    if (text.length > long) {
+        text = text.slice(0, long) + '...'
+    }
+    return text
+}
