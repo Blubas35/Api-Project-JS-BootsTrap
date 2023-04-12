@@ -33,7 +33,7 @@ async function init() {
       postItem.classList.add('post-item', 'col-12');
       
       const divWrapper = document.createElement('div')
-      divWrapper.classList.add('div-wrapper', 'row-md')
+      divWrapper.classList.add('div-wrapper')
 
       const divElement = document.createElement('div')
       divElement.classList.add('shadow-sm', 'col-xl-6', 'col-lg-7', 'col-md-10', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'row', 'row-gap-2')

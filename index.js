@@ -1,4 +1,5 @@
 import { createPageMainHeader } from "./header.js";
+import { textTruncate } from "./function.js";
 import { API_URL } from "./config.js";
 import { firstLetterUpperCase, fetchData, createTopPostLink, createTopPostWrapper } from "./function.js";
 
@@ -157,7 +158,7 @@ async function init() {
             const id = album.id
             const userId = album.userId
             const name = album.user.name
-            const title = album.title
+            const title = firstLetterUpperCase(album.title)
             const photosArr = album.photos
 
             const albumItem = document.createElement('li')
@@ -166,8 +167,8 @@ async function init() {
             const resultLink = document.createElement('a')
             resultLink.classList.add('result-link', 'd-flex', 'flex-column','align-items-start', 'gap-3')
             const albumTitleElement = document.createElement('span')
-            albumTitleElement.textContent = firstLetterUpperCase(title)
-            albumTitleElement.classList.add('w-100', 'text-truncate')
+            albumTitleElement.textContent = textTruncate(title, 20)
+            albumTitleElement.classList.add('w-100')
             resultLink.href = `./album.html?album_id=${id}`
             resultLink.style.maxWidth = '200px'
 
