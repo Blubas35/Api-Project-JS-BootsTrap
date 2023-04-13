@@ -1,5 +1,6 @@
-import { fetchData, getParams } from "./function.js"
+import { fetchData, getParams, firstLetterUpperCase } from "./function.js"
 import { API_URL } from "./config.js"
+import { createPageMainHeader } from "./header.js"
 
 async function init() {
     const createPostForm = document.querySelector('#create-post-form')
@@ -8,13 +9,11 @@ async function init() {
     const bodyElement = createPostForm.body
     const submitButton = createPostForm.submit
 
+    createPostForm.before(createPageMainHeader())
 
     const users = await fetchData(`${API_URL}/users`)
 
     users.map(user => {
-        console.log(user.name)
-        console.log(user.id)
-
         const userOptionElement = document.createElement('option')
         userOptionElement.textContent = user.name
         userOptionElement.value = user.id
@@ -22,26 +21,26 @@ async function init() {
         userSelectElement.append(userOptionElement)
     })
 
+    userSelectElement.disabled = true;
+
     submitButton.removeAttribute('disabled')
 
     const postId = getParams('post_id')
     const postToEdit = await fetchData(`${API_URL}/posts/${postId}`)
 
+    console.log(postToEdit)
+
     userSelectElement.value = postToEdit.userId
-    titleElement.value = postToEdit.title
-    bodyElement.value = postToEdit.body
+    titleElement.value = firstLetterUpperCase(postToEdit.title)
+    bodyElement.value = firstLetterUpperCase(postToEdit.body)
 
     createPostForm.addEventListener('submit', async (event) => {
         event.preventDefault()
         const title = event.target.title.value
         const body = event.target.body.value
         const userId = Number(event.target.user.value)
-        
+
         const editPostData = {
-            // title: title,
-            // boyd: body,
-            // userId: user
-            // galima ir tiap rasyti kad nereiketu po du kartus
             id: postId,
             title,
             body,
@@ -62,7 +61,7 @@ async function init() {
         }
 
         createPostForm.after(await createNewPostElement(newPost))
-        
+
     })
 
 }
@@ -71,11 +70,18 @@ async function createNewPostElement(postData) {
     const user = await fetchData(`${API_URL}/users/${userId}`)
 
     const postItem = document.createElement('div')
-    postItem.classList.add('post-item')
+    postItem.classList.add('post-item', 'mx-auto', 'my-5', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'row', 'row-gap-2')
 
-    postItem.innerHTML = `<h2 class="post-title"> ${title} (id: ${id})</h2>
-    <span class="post-author">Author: ${user.name}</span>
-    <p class="post-body">${body}</p>        `
+    postItem.innerHTML = `
+    <a class="post-link-title order-2 fs-4 text-decoration-none text-dark fw-bolder" href="./post.html?post_id=${id}"> 
+    ${title} (id: ${id})
+    </a>
+    <span class="post-author order-1 text-secondary">
+    Author: 
+    <a class="post-author-link text-secondary" href="./user.html?user_id=${userId}">
+    ${user.name}</a>
+    </span>
+    <p class="post-body order-3 fs-5 fw-lighter">${body}</p>`
 
     return postItem
 }

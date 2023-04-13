@@ -4,6 +4,7 @@ import { API_URL } from "./config.js"
 
 async function init() {
     const pageContent = document.querySelector('#page-content')
+    pageContent.classList.add('px-6', 'px-4')
     pageContent.before(createPageMainHeader())
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
