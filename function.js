@@ -45,3 +45,10 @@ export function textTruncate(text, long) {
     }
     return text
 }
+
+export function deletePreviousElement(className) {
+    const prevElement = document.querySelector(`${className}`)
+    if (prevElement) {
+        prevElement.remove()
+    }
+}
