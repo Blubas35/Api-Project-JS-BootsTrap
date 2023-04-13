@@ -17,10 +17,7 @@ async function init() {
 
     submitButton.addEventListener('click', async (event) => {
         event.preventDefault()
-
-        const resultWrapper = document.createElement('div')
-        resultWrapper.classList.add('result-wrapper')
-
+        
         const searchBar = document.querySelector('.search-input')
         const keyword = searchBar.value
         const searchCategory = selectElement.value.toLowerCase()
@@ -30,12 +27,19 @@ async function init() {
 
         if (searchCategory === 'posts') {
             await createPostElement(keyword)
-        } else if (searchCategory === 'albums') {
+        }
+
+        if (searchCategory === 'albums') {
             await createAlbumElement(keyword)
-        } else if (searchCategory === 'users') {
+        }
+
+        if (searchCategory === 'users') {
             await createUserElement(keyword)
-        } else {
-            console.log('blogai')
+        } 
+        if (searchCategory === 'all') {
+            await createUserElement(keyword)
+            await createPostElement(keyword)
+            await createAlbumElement(keyword)
         }
     })
 
@@ -44,7 +48,7 @@ async function init() {
 
         const usersFound = userResults.length
         const userResultWrapper = document.createElement('div')
-        userResultWrapper.classList.add('user-result-wrapper', 'previous')
+        userResultWrapper.classList.add('user-result-wrapper', 'previous', 'shadow-sm', 'col-xl-6', 'col-lg-7', 'col-md-10', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'row', 'row-gap-2')
 
         const userResultTitle = document.createElement('h3')
         userResultTitle.classList.add('user-result-title')
@@ -60,7 +64,7 @@ async function init() {
             userResult.classList.add('user-result')
 
             const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link')
+            resultLink.classList.add('result-link', 'post-author-link', 'text-secondary')
             resultLink.textContent = firstName
             resultLink.href = `./user.html?user_id=${id}`
 
@@ -77,7 +81,7 @@ async function init() {
 
         const postsFound = resultsPosts.length
         const postResultWrapper = document.createElement('div')
-        postResultWrapper.classList.add('post-result-wrapper', 'previous')
+        postResultWrapper.classList.add('post-result-wrapper', 'previous', 'shadow-sm', 'col-xl-6', 'col-lg-7', 'col-md-10', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'row', 'row-gap-2')
         const postResultTitle = document.createElement('h3')
         postResultTitle.classList.add('post-result-title')
         postResultTitle.textContent = `${postsFound} Posts found with keyword '${word}': `
@@ -95,15 +99,16 @@ async function init() {
             postItem.classList.add('post-item')
 
             const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link')
+            resultLink.classList.add('result-link', 'post-author-link')
             resultLink.textContent = firstLetterUpperCase(title)
             resultLink.href = `./post.html?post_id=${id}`
 
             const postItemDescription = document.createElement('span')
-            postItemDescription.classList.add('post-item-description')
+            postItemDescription.classList.add('post-item-description', 'text-secondary')
             postItemDescription.textContent = `. Written by: `
 
             const postItemDescriptionLink = document.createElement('a')
+            postItemDescriptionLink.classList.add('post-author-link', 'text-secondary')
             postItemDescriptionLink.textContent = post.user.name
             postItemDescriptionLink.href = `./user.html?user_id=${userId}`
 
@@ -122,7 +127,7 @@ async function init() {
 
         const albumsFound = resultsAlbums.length
         const albumsResultWrapper = document.createElement('div')
-        albumsResultWrapper.classList.add('albums-result-wrapper', 'previous')
+        albumsResultWrapper.classList.add('albums-result-wrapper', 'previous', 'shadow-sm', 'col-xl-6', 'col-lg-7', 'col-md-10', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'row', 'row-gap-2')
         const albumsResultTitle = document.createElement('h3')
         albumsResultTitle.classList.add('post-result-title')
         albumsResultTitle.textContent = `${albumsFound} Albums found with keyword '${word}': `
@@ -141,15 +146,16 @@ async function init() {
             albumItem.classList.add('album-item')
 
             const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link')
+            resultLink.classList.add('result-link', 'post-author-link')
             resultLink.textContent = firstLetterUpperCase(title)
             resultLink.href = `./album.html?album_id=${id}`
 
             const albumItemDescription = document.createElement('span')
-            albumItemDescription.classList.add('album-item-description')
+            albumItemDescription.classList.add('album-item-description', 'text-secondary')
             albumItemDescription.textContent = `. Made by: `
 
             const albumItemDescriptionLink = document.createElement('a')
+            albumItemDescriptionLink.classList.add('post-author-link', 'text-secondary')
             albumItemDescriptionLink.textContent = name
             albumItemDescriptionLink.href = `./user.html?user_id=${userId}`
 
