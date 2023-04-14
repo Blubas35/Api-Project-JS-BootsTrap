@@ -43,7 +43,7 @@ async function init() {
         let { title, thumbnailUrl } = photo
 
         const divElement = document.createElement('div')
-        divElement.classList.add('col', 'xs-6')
+        divElement.classList.add('col-auto')
 
         const photoLink = document.createElement('a');
         photoLink.href = thumbnailUrl;

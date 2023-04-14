@@ -32,7 +32,7 @@ export function createTopPostLink(post, index) {
 
 export function createTopPostWrapper(topPostLink) {
     const topPostWrapper = document.createElement('div')
-    topPostWrapper.classList.add('top-post-wrapper', 'px-4' )
+    topPostWrapper.classList.add('top-post-wrapper', 'px-4')
 
     topPostWrapper.append(topPostLink)
 
@@ -50,5 +50,14 @@ export function deletePreviousElement(className) {
     const prevElement = document.querySelector(`${className}`)
     if (prevElement) {
         prevElement.remove()
+    }
+}
+
+export function addClassResponsive(className) {
+    const screenWidth = window.innerWidth;
+    const element = document.querySelector(`${className}`);
+
+    if (screenWidth < 450) {
+        element.classList.add('mx-auto');
     }
 }

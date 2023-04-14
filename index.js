@@ -1,22 +1,25 @@
 import { createPageMainHeader } from "./header.js";
-import { textTruncate } from "./function.js";
+import { addClassResponsive } from "./function.js";
 import { API_URL } from "./config.js";
 import { firstLetterUpperCase, fetchData, createTopPostLink, createTopPostWrapper } from "./function.js";
 
 async function init() {
     const pageContent = document.querySelector('#page-content');
+    pageContent.classList.add('px-6', 'px-4')
+
+    // header and hero box stuff
 
     pageContent.before(createPageMainHeader())
     const heroBoxElement = document.createElement('div')
     heroBoxElement.classList.add('masthead', 'd-flex', 'justify-content-center')
-    heroBoxElement.style.backgroundImage = 'url(./images/pexels-gradienta-7135053.jpg)'
+    heroBoxElement.style.backgroundImage = 'url(./images/hero-box-bg.jpg)'
     const heroBoxContentWrapper = document.createElement('div')
     heroBoxContentWrapper.classList.add('align-self-center')
     const heroBoxContent = document.createElement('div')
     heroBoxContent.classList.add()
     const heroBoxTitle = document.createElement('h1')
     heroBoxTitle.classList.add()
-    heroBoxTitle.textContent = 'Landing Page Title'
+    heroBoxTitle.textContent = 'JSON placeholder website'
 
     heroBoxContent.append(heroBoxTitle)
     heroBoxContentWrapper.append(heroBoxContent)
@@ -25,39 +28,49 @@ async function init() {
     const container = document.createElement('div')
     container.classList.add('container')
 
+    // creating main content wrappers (albums, users, post & row/col)
+
     const mainContent = document.createElement('main')
     mainContent.classList.add('main-content')
     const divElement = document.createElement('div')
-    divElement.classList.add('row')
-    const userPostDiv = document.createElement('div')
-    userPostDiv.classList.add('col-xl-4')
+    divElement.classList.add('row', 'justify-content-center')
+    const postResultTitle = document.createElement('h2')
+    postResultTitle.classList.add('post-title', 'p-3', 'fs-1', 'text-dark', 'fw-bolder')
+    postResultTitle.textContent = `Top post of the month:`
     const divElement2 = document.createElement('div')
     divElement2.classList.add('d-flex', 'flex-column', 'gap-5')
+    const colPostElement = document.createElement('div')
+    colPostElement.classList.add('col-xl-10', 'col-lg-10')
+    const rowAlbumUserWrapper = document.createElement('div')
+    rowAlbumUserWrapper.classList.add('row', 'gx-5')
+    const userPostDiv = document.createElement('div')
+    userPostDiv.classList.add('col-xl-4')
     const userElement = document.createElement('div')
-    userElement.classList.add('user-wrapper', 'mx-auto')
+    userElement.classList.add('user-wrapper', 'me-auto', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded')
+    const postWrapper = document.createElement('div')
+    postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'p-4' )
     const postElement = document.createElement('div')
-    postElement.classList.add('post-wrapper')
+    postElement.classList.add('post-wrapper', 'row', 'shadow-sm', 'mb-5', 'bg-body-tertiary', 'rounded')
+    const postImageWrapper = document.createElement('div')
+    postImageWrapper.classList.add('post-image', 'col-md-6', 'col-12')
+    postImageWrapper.style.backgroundImage = 'url("https://images.unsplash.com/photo-1558174685-430919a96c8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80")'
     const albumsElement = document.createElement('div')
-    albumsElement.classList.add('albums-wrapper', 'col-xl-8')
+    albumsElement.classList.add('albums-wrapper', 'col-xl-8', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded')
     const commentsElement = document.createElement('div')
     commentsElement.classList.add('comments-wrapper')
     const commentsList = document.createElement('ul')
     commentsList.classList.add('comments-list')
-    const carouselTitle = document.querySelector('#carousel-title')
-    const carouselItem1 = document.querySelector('#carousel-item-1')
-    const carouselItem2 = document.querySelector('#carousel-item-2')
-    const carouselItem3 = document.querySelector('#carousel-item-3')
-    const carouselWrapper = document.querySelector('#SimpleCarouselExample')
 
-    
-    divElement2.append(carouselWrapper, userElement)
+    divElement2.append(userElement)
     userPostDiv.append(divElement2)
+
+    // creating users element using api
 
     async function createUserElement() {
         const userResults = await fetchData(`${API_URL}/users?_limit=5`)
 
         const userResultTitle = document.createElement('h3')
-        userResultTitle.classList.add('user-result-title')
+        userResultTitle.classList.add('user-result-title', 'fs-4', 'text-dark', 'fw-bolder')
         userResultTitle.textContent = `Top 5 contributed users: `
 
         userElement.prepend(userResultTitle)
@@ -84,60 +97,28 @@ async function init() {
     }
     await createUserElement()
 
+    // creating post element using api
+
     async function createPostElement() {
 
         const resultsPosts = await fetchData(`${API_URL}/posts?_limit=3&_expand=user`)
-        const postResultTitle = document.createElement('h3')
-        // postResultTitle.classList.add('post-result-title')
-        // postResultTitle.textContent = `Top posts of the month: `
-        carouselTitle.textContent = `Top posts of the month:`
-        carouselTitle.classList.add('px-4', 'mx-auto')
-
         console.log(resultsPosts)
-        postElement.prepend(postResultTitle)
-        const postList = document.createElement('ul')
-        postList.classList.add('post-list')
-
-        const carouselItemArr = [carouselItem1, carouselItem2, carouselItem3]
-        for (let i = 0; i < carouselItemArr.length; i++) {
-            const topPost = resultsPosts[i]
-            const topPostLink = createTopPostLink(topPost, i)
-            const topPostWrapper = createTopPostWrapper(topPostLink)
-            carouselItemArr[i].append(topPostWrapper)
-        }
-
-
-        resultsPosts.forEach(post => {
-            // const id = post.id
-            // const userId = post.userId
-            // const title = post.title
-            // const comments = post.comments
-
-            // const postItem = document.createElement('li')
-            // postItem.classList.add('post-item')
-
-            // const resultLink = document.createElement('a')
-            // resultLink.classList.add('result-link')
-            // resultLink.textContent = firstLetterUpperCase(title)
-            // resultLink.href = `./post.html?post_id=${id}`
-
-            // const postItemDescription = document.createElement('span')
-            // postItemDescription.classList.add('post-item-description')
-            // postItemDescription.textContent = `. Written by: `
-
-            // const postItemDescriptionLink = document.createElement('a')
-            // postItemDescriptionLink.textContent = post.user.name
-            // postItemDescriptionLink.href = `./user.html?user_id=${userId}`
-
-            // postItem.append(resultLink, postItemDescription, postItemDescriptionLink)
-            // postList.append(postItem)
-            // carouselItem1.append(postItem)
-        })
-
-
-        postElement.append(postList)
+        const postListTitle = document.createElement('a')
+        postListTitle.classList.add('post-link-title', 'fs-4', 'text-decoration-none', 'text-dark', 'fw-bolder')
+        postListTitle.textContent = firstLetterUpperCase(resultsPosts[0].title)
+        postListTitle.href = './post.html?post_id=' + resultsPosts[0].id
+        const postList = document.createElement('p')
+        postList.classList.add('post-content','fw-lighter')
+        postList.textContent = firstLetterUpperCase(resultsPosts[0].body)
+        const postButton = document.createElement('a')
+        postButton.classList.add('post-author-link')
+        postButton.textContent = 'Read more'
+        postButton.href = './post.html?post_id=' + resultsPosts[0].id
+        postWrapper.append(postListTitle, postList, postButton)
     }
     await createPostElement()
+
+    // creating album element using api
 
     async function createAlbumElement() {
 
@@ -147,10 +128,10 @@ async function init() {
         const albumsResultWrapper = document.createElement('div')
         albumsResultWrapper.classList.add('albums-result-wrapper', 'previous')
         const albumsResultTitle = document.createElement('h3')
-        albumsResultTitle.classList.add('post-result-title')
+        albumsResultTitle.classList.add('post-result-title', 'p-3', 'fs-1', 'text-dark', 'fw-bolder')
         albumsResultTitle.textContent = `Most popular albums: `
         const albumList = document.createElement('ul')
-        albumList.classList.add('album-list', 'row', 'gap-3')
+        albumList.classList.add('album-list', 'row')
 
         albumsElement.prepend(albumsResultTitle)
 
@@ -162,13 +143,14 @@ async function init() {
             const photosArr = album.photos
 
             const albumItem = document.createElement('li')
-            albumItem.classList.add('album-item', 'd-flex', 'flex-column', 'col', 'gap-3', 'pb-2', 'justify-content-between')
+            albumItem.classList.add('album-item', 'd-flex', 'flex-column', 'col-3', 'gap-3', 'pb-5', 'justify-content-between',)
 
             const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link', 'd-flex', 'flex-column','align-items-start', 'gap-3')
+            resultLink.classList.add('result-link', 'd-flex', 'flex-column', 'align-items-start', 'gap-3')
             const albumTitleElement = document.createElement('span')
-            albumTitleElement.textContent = textTruncate(title, 20)
-            albumTitleElement.classList.add('w-100')
+            albumTitleElement.textContent = title
+            // albumTitleElement.textContent = textTruncate(title, 20)
+            albumTitleElement.classList.add('w-100', 'text-truncate')
             resultLink.href = `./album.html?album_id=${id}`
             resultLink.style.maxWidth = '200px'
 
@@ -197,11 +179,23 @@ async function init() {
         })
     }
     await createAlbumElement()
-    divElement.append(albumsElement, userPostDiv)
-    mainContent.append(postElement, divElement)
+
+    // appending everything
+
+    rowAlbumUserWrapper.append(albumsElement, userPostDiv)
+    postElement.append(postWrapper, postImageWrapper)
+    colPostElement.append(postResultTitle, postElement, rowAlbumUserWrapper)
+    postResultTitle
+    divElement.append(colPostElement)
+    mainContent.append(divElement)
     container.append(mainContent)
     pageContent.append(container)
     pageContent.before(heroBoxElement)
+
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 450) {
+        addClassResponsive('.user-wrapper')
+    }
 }
 
 init()

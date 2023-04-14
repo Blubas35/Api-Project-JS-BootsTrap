@@ -5,7 +5,7 @@ async function renderUser() {
     const pageContent = document.querySelector('#page-content')
     pageContent.classList.add('px-6', 'px-4')
     pageContent.before(createPageMainHeader())
-    
+
     const queryParams = location.search
     const urlParams = new URLSearchParams(queryParams)
     const id = urlParams.get('user_id')
@@ -27,24 +27,51 @@ async function renderUser() {
     const userInfoTitle = document.createElement('h2')
     userInfoTitle.classList.add('user-info-title', 'col-12')
     userInfoTitle.textContent = `Users ${name} (Id: ${id}) information:`
+    userInfoTitle.innerHTML = `Users <span class="user-info-name">${name} (Id: ${id})</span> information:`;
+
+    const userNameWrapper = document.createElement('div')
+    userNameWrapper.classList.add('user-name-wrapper')
 
     const userNameElement = document.createElement('span')
-    userNameElement.classList.add('user-name', 'col-12')
-    userNameElement.textContent = `Full name: ${name}`
+    userNameElement.classList.add('user-name', 'first', 'col-12')
+    userNameElement.textContent = `Full name: `
+
+    const userNameElement2 = document.createElement('span')
+    userNameElement2.classList.add('user-name2')
+    userNameElement2.textContent = name
+    userNameWrapper.append(userNameElement, userNameElement2)
+
+    const userNickNameWrapper = document.createElement('div')
+    userNickNameWrapper.classList.add('user-nickName-wrapper', 'col-12')
 
     const userNickNameElement = document.createElement('span')
-    userNickNameElement.classList.add('nick-name', 'col-12')
-    userNickNameElement.textContent = `Username: ${username}`
+    userNickNameElement.classList.add('nick-name', 'first')
+    userNickNameElement.textContent = `Username: `
+
+    const userNickNameElement2 = document.createElement('span')
+    userNickNameElement2.classList.add('nick-name2')
+    userNickNameElement2.textContent = `${username}`
+    userNickNameWrapper.append(userNickNameElement, userNickNameElement2)
+
+    const userEmailWrapper = document.createElement('div')
+    userEmailWrapper.classList.add('user-email-wrapper', 'col-12')
 
     const userEmailElement = document.createElement('span')
-    userEmailElement.classList.add('user-email', 'col-12')
-    userEmailElement.textContent = `Email address: ${email}`
+    userEmailElement.classList.add('user-email', 'first')
+    userEmailElement.textContent = `Email address: `
+
+    const emailLink = document.createElement('a')
+    emailLink.classList.add('email-link')
+    emailLink.textContent = email
+    emailLink.href = `mailto:${email}`
+
+    userEmailWrapper.append(userEmailElement, emailLink)
 
     const addressWrapper = document.createElement('div')
     addressWrapper.classList.add('address-wrapper', 'col-12')
 
     const addressSpanElement = document.createElement('span')
-    addressSpanElement.classList.add('span-element')
+    addressSpanElement.classList.add('span-element', 'first')
     addressSpanElement.textContent = 'Address: '
 
     const userAddressMapElement = document.createElement('a')
@@ -59,7 +86,7 @@ async function renderUser() {
     userPhoneWrapper.classList.add('user-phone-wrapper', 'col-12')
 
     const userPhoneElement = document.createElement('span')
-    userPhoneElement.classList.add('user-phone')
+    userPhoneElement.classList.add('user-phone', 'first')
     userPhoneElement.textContent = `Phone number: `
 
     const userPhone = document.createElement('a')
@@ -68,11 +95,12 @@ async function renderUser() {
     userPhone.href = `tel:${phone}`
 
     userPhoneWrapper.append(userPhoneElement, userPhone)
-    
+
     const websiteWrapper = document.createElement('div')
     websiteWrapper.classList.add('website-wrapper', 'col-12')
 
     const spanElement = document.createElement('span')
+    spanElement.classList.add('website', 'first')
     spanElement.textContent = `Website: `
     const userWebsiteElement = document.createElement('a')
     userWebsiteElement.classList.add('user-website', 'col-12')
@@ -81,11 +109,19 @@ async function renderUser() {
 
     websiteWrapper.append(spanElement, userWebsiteElement)
 
-    const userCompanyNameElement = document.createElement('span')
-    userCompanyNameElement.classList.add('user-company-name')
-    userCompanyNameElement.textContent = `Company name: ${companyName}`
+    const companyNameWrapper = document.createElement('div')
+    companyNameWrapper.classList.add('company-name-wrapper')
 
-    rowElement.append(userInfoTitle, userNameElement, userNickNameElement, userEmailElement, addressWrapper, userPhoneWrapper, websiteWrapper, userCompanyNameElement)
+    const userCompanyNameElement = document.createElement('span')
+    userCompanyNameElement.classList.add('user-company-name', 'first')
+    userCompanyNameElement.textContent = `Company name: `
+
+    const userCompanyNameElement2 = document.createElement('span')
+    userCompanyNameElement2.classList.add('user-company-name')
+    userCompanyNameElement2.textContent = `${companyName}`
+    companyNameWrapper.append(userCompanyNameElement, userCompanyNameElement2)
+
+    rowElement.append(userInfoTitle, userNameWrapper, userNickNameWrapper, userEmailWrapper, addressWrapper, userPhoneWrapper, websiteWrapper, companyNameWrapper)
 
     userInfoElement.append(rowElement)
 
@@ -93,15 +129,20 @@ async function renderUser() {
     const userPostWrapper = document.createElement('div')
     userPostWrapper.classList.add('user-post-wrapper', 'shadow-sm', 'col-xl-8', 'col-lg-9', 'col-md-10', 'p-4', 'mb-5', 'bg-body-tertiary', 'rounded')
 
-    const userPostListTitle = document.createElement('h2')
-    userPostListTitle.classList.add('post-list-title')
-    userPostListTitle.textContent = `${name} Posts:`
+    const userPostTitleWrapper = document.createElement('div');
+    userPostTitleWrapper.classList.add('user-post-title-wrapper');
+
+    const userPostListTitle = document.createElement('h2');
+    userPostListTitle.classList.add('post-list-title');
+    userPostListTitle.innerHTML = `<span class="italic">${name}</span> Posts:`;
+
+    userPostTitleWrapper.append(userPostListTitle);
 
     const userPostList = document.createElement('ul')
     userPostList.classList.add('user-post-list', 'list-unstyled', 'd-flex', 'flex-column', 'row-gap-2')
 
     posts.map(post => {
-        let { title} = post
+        let { title } = post
 
         const userPostTitle = document.createElement('li')
         userPostTitle.classList.add('user-post-title')
@@ -113,16 +154,24 @@ async function renderUser() {
 
         userPostTitle.append(userPostLink)
         userPostList.append(userPostTitle)
-        userPostWrapper.append(userPostListTitle, userPostList)
+        userPostWrapper.append(userPostTitleWrapper, userPostList)
         pageContent.append(userPostWrapper)
+        const screenWidth = window.innerWidth;
+        if (screenWidth < 450) {
+            addClassResponsive('.user-wrapper')
+        }
     })
 
     const userAlbumWrapper = document.createElement('div')
     userAlbumWrapper.classList.add('user-album-wrapper', 'shadow-sm', 'col-xl-8', 'col-lg-9', 'col-md-10', 'p-4', 'mb-5', 'bg-body-tertiary', 'rounded')
 
-    const userAlbumListTitle = document.createElement('h2')
-    userAlbumListTitle.classList.add('album-list-title')
-    userAlbumListTitle.textContent = `${name} Albums:`
+    const userAlbumListWrapper = document.createElement('div');
+    userAlbumListWrapper.classList.add('album-list-title-wrapper');
+
+    const userAlbumListTitle = document.createElement('h2');
+    userAlbumListTitle.classList.add('album-list-title');
+    userAlbumListTitle.innerHTML = `<span class="italic">${name}</span> Albums:`;
+    userAlbumListWrapper.append(userAlbumListTitle);
 
     const userAlbumList = document.createElement('ul')
     userAlbumList.classList.add('user-album-list', 'list-unstyled', 'd-flex', 'flex-column', 'row-gap-2')
@@ -141,6 +190,6 @@ async function renderUser() {
         userAlbumWrapper.append(userAlbumListTitle, userAlbumList)
         pageContent.append(userAlbumWrapper)
     })
-    
+
 }
 renderUser()

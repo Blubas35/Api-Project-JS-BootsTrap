@@ -1,7 +1,7 @@
 import { MENU_ITEMS } from "./config.js";
 
 export function createPageMainHeader(showCategories = true) {
-  
+
   const navigation = document.createElement('nav');
   navigation.classList.add('navbar', 'navbar-expand-lg', 'bg-body-tertiary')
   const divContainerNavigation = document.createElement('div')
@@ -10,6 +10,11 @@ export function createPageMainHeader(showCategories = true) {
   imageWrapperAElement.classList.add('navbar-brand')
   imageWrapperAElement.href = '/index.html'
   imageWrapperAElement.textContent = 'JSON website'
+
+  window.addEventListener('scroll', function () {
+    const navbar = document.querySelector('.navbar');
+    navbar.classList.toggle('sticky', window.scrollY > 0);
+  });
 
   let logoHTML = `<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
   <span class="navbar-toggler-icon"></span>
@@ -42,7 +47,7 @@ export function createPageMainHeader(showCategories = true) {
   submitButton.setAttribute('value', 'Search')
 
   const menuList = document.createElement('ul');
-  menuList.classList.add('menu', 'navbar-nav', 'column-gap-3', 'mb-2', 'mb-lg-0',  'ms-auto');
+  menuList.classList.add('menu', 'navbar-nav', 'column-gap-3', 'mb-2', 'mb-lg-0', 'ms-auto');
 
   MENU_ITEMS.forEach(menuItem => {
     let { title, path } = menuItem;

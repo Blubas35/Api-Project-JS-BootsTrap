@@ -3,30 +3,84 @@
     /* background-image: url("images/background-gradient.jpg"); 
 }*/
 .masthead {
-    height: 300px;
+    position: relative;
+    padding-top: calc(8rem + 77px);
+    padding-bottom: 13rem;
+    background: no-repeat center center;
+    background-color: rgba(0, 0, 0, 0);
+    background-attachment: scroll;
+    background-image: none;
+    background-size: auto;
+    background-size: cover;
+    background-attachment: scroll;
 }
 
-.carousel-control-next, .carousel-control-prev {
+/* .masthead {
+    height: 500px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-y: center;
+}
+
+@media (max-width: 767px) {
+    .masthead {
+        background-size: contain;
+        background-position: center;
+    }
+} */
+
+
+
+.carousel-control-next,
+.carousel-control-prev {
     top: 113%;
 }
+
 .carousel-control-next {
     right: -1%;
 }
+
 .carousel-control-prev {
     left: 61%;
 }
 
-.carousel-control-prev, .carousel-control-next {
+.carousel-control-prev,
+.carousel-control-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
-  }
-  
-  .carousel-control-prev {
+}
+
+.carousel-control-prev {
     left: 4%;
-  }
-  
-  .carousel-control-next {
+}
+
+.carousel-control-next {
     right: 4%;
-  }
+}
+
+.album-list {
+    padding: 0;
+}
+
+@media screen and (min-width: 510px) and (max-width: 850px) {
+    .album-item {
+        flex: 0 0 auto;
+        width: calc((100% / 12) * 4);
+    }
+}
+@media screen and (min-width: 330px) and (max-width: 510px) {
+    .album-item {
+        flex: 0 0 auto;
+        width: calc((100% / 12) * 6);
+    }
+    .album-list {
+        align-items: center;
+    }
+}
+
+.post-image {
+    background-size: cover;
+    background-position: bottom;
+}
