@@ -52,12 +52,3 @@ export function deletePreviousElement(className) {
         prevElement.remove()
     }
 }
-
-export function addClassResponsive(className) {
-    const screenWidth = window.innerWidth;
-    const element = document.querySelector(`${className}`);
-
-    if (screenWidth < 450) {
-        element.classList.add('mx-auto');
-    }
-}

@@ -1,4 +1,4 @@
-import { MENU_ITEMS } from "./config.js";
+import { MENU_ITEMS } from "../config.js";
 
 export function createPageMainHeader(showCategories = true) {
 
@@ -29,18 +29,24 @@ export function createPageMainHeader(showCategories = true) {
   form.classList.add('form')
 
   if (!showCategories) {
+    const labelElement = document.createElement('label')
+    labelElement.setAttribute('for', 'select-htmlElement')
     const selectElement = document.createElement('select')
     selectElement.classList.add('select-element')
+    selectElement.setAttribute('id', 'select-htmlElement')
     const optionArr = ['all', 'posts', 'users', 'albums']
 
     createOptionElement(optionArr, selectElement)
-    form.append(selectElement)
+    form.append(labelElement,selectElement)
   }
 
+  const searchLabel = document.createElement('label')
+  searchLabel.setAttribute('for', 'search-bar')
   const searchInput = document.createElement('input')
   searchInput.classList.add('search-input')
   searchInput.setAttribute('placeholder', 'Type to search')
   searchInput.setAttribute('name', 'search')
+  searchInput.setAttribute('id', 'search-bar')
   const submitButton = document.createElement('input')
   submitButton.classList.add('submit-button')
   submitButton.setAttribute('type', 'submit')
@@ -61,7 +67,7 @@ export function createPageMainHeader(showCategories = true) {
     const menuLink = document.createElement('a');
     menuLink.textContent = title;
     menuLink.href = './' + path;
-    menuLink.classList.add('nav-item', 'text-decoration-none')
+    menuLink.classList.add('nav-item', 'post-author-link')
 
     menuItemElement.append(menuLink);
     menuList.append(menuItemElement);
@@ -72,7 +78,7 @@ export function createPageMainHeader(showCategories = true) {
     form.setAttribute('action', './search.html')
   })
 
-  form.append(searchInput, submitButton)
+  form.append(searchLabel, searchInput, submitButton)
   divContainerMenu.append(menuList, form)
   divContainerNavigation.append(imageWrapperAElement, divContainerMenu)
   navigation.append(divContainerNavigation)

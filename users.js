@@ -1,4 +1,4 @@
-import { createPageMainHeader } from "./header.js";
+import { createPageMainHeader } from "./Components/header.js";
 
 async function init() {
     const res = await fetch(`https://jsonplaceholder.typicode.com/users?_embed=posts`)
@@ -44,6 +44,7 @@ function createListElement(users, photosArr) {
         userPhotoLink.href = `./user.html?user_id=${user.id}`
         const userPhotoElement = document.createElement('img')
         userPhotoElement.classList.add('user-photo')
+        userPhotoElement.setAttribute('alt', 'user profile picture')
 
         const photo = photosArr[index]
         const profilePic = photo.picture.thumbnail

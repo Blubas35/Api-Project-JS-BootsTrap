@@ -1,8 +1,8 @@
 import { fetchData, deletePreviousElement } from "./function.js"
 import { API_URL } from "./config.js"
-import { createPageMainHeader } from "./header.js"
+import { createPageMainHeader } from "./Components/header.js"
 
-async function init() {
+export async function init() {
     const createPostForm = document.querySelector('#create-post-form')
     const userSelectElement = createPostForm.user
     const submitButton = createPostForm.submit

@@ -7,6 +7,19 @@
     padding-top: 70px;
 }
 
+.masthead {
+    position: relative;
+    padding-top: calc(8rem + 77px);
+    padding-bottom: 13rem;
+    background: no-repeat center center;
+    background-color: rgba(0, 0, 0, 0);
+    background-attachment: scroll;
+    background-image: none;
+    background-size: auto;
+    background-size: cover;
+    background-attachment: scroll;
+}
+
 @media screen and (min-width: 640px) {
     .px-6 {
         padding-left: 100px !important;
@@ -14,7 +27,7 @@
     }
 }
 
-@media screen and (min-width: 330px) and (max-width: 550px)  {
+@media screen and (min-width: 330px) and (max-width: 550px) {
     .xs-6 {
         flex: 0 0 auto;
         flex-grow: 0;
@@ -26,6 +39,7 @@
 
 .post-author-link {
     text-decoration: none;
+    color: #024ebf;
 }
 
 .post-author-link:hover {
@@ -38,4 +52,16 @@
 
 .fs-7 {
     font-size: 0.75rem;
+}
+
+.text-secondary {
+    color: #4f565c !important;
+}
+
+.btn.btn-primary {
+    background-color: #024ebf;
+    border-color: #024ebf;
+}
+.btn.btn-primary:hover {
+    opacity: 80%;
 }

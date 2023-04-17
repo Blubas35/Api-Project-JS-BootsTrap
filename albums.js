@@ -1,6 +1,6 @@
 // https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_limit=15
 import { firstLetterUpperCase, textTruncate } from './function.js';
-import { createPageMainHeader } from './header.js'
+import { createPageMainHeader } from './Components/header.js'
 
 async function init() {
     const res = await fetch('https://jsonplaceholder.typicode.com/albums?_limit=15&_embed=photos&_expand=user');
@@ -59,6 +59,7 @@ function createAlbumItemElement(album) {
     const photoElement = document.createElement('img');
     photoElement.src = randomPhoto.thumbnailUrl;
     photoElement.title = randomPhoto.title;
+    photoElement.setAttribute('alt', 'album cover')
 
     photoLink.append(photoElement)
     imageWrapper.append(photoLink)

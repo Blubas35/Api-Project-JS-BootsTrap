@@ -1,7 +1,7 @@
-import { createPageMainHeader } from "./header.js";
-import { addClassResponsive } from "./function.js";
+import { createPageMainHeader } from "./Components/header.js";
+import { createHeroBox } from "./Components/heroBox.js";
 import { API_URL } from "./config.js";
-import { firstLetterUpperCase, fetchData, createTopPostLink, createTopPostWrapper } from "./function.js";
+import { firstLetterUpperCase, fetchData} from "./function.js";
 
 async function init() {
     const pageContent = document.querySelector('#page-content');
@@ -10,20 +10,7 @@ async function init() {
     // header and hero box stuff
 
     pageContent.before(createPageMainHeader())
-    const heroBoxElement = document.createElement('div')
-    heroBoxElement.classList.add('masthead', 'd-flex', 'justify-content-center')
-    heroBoxElement.style.backgroundImage = 'url(./images/hero-box-bg.jpg)'
-    const heroBoxContentWrapper = document.createElement('div')
-    heroBoxContentWrapper.classList.add('align-self-center')
-    const heroBoxContent = document.createElement('div')
-    heroBoxContent.classList.add()
-    const heroBoxTitle = document.createElement('h1')
-    heroBoxTitle.classList.add()
-    heroBoxTitle.textContent = 'JSON placeholder website'
-
-    heroBoxContent.append(heroBoxTitle)
-    heroBoxContentWrapper.append(heroBoxContent)
-    heroBoxElement.append(heroBoxContentWrapper)
+    pageContent.before(createHeroBox('JSON placeholder website', {backgroundImage: 'url(./images/hero-box-bg.jpg)'}))
 
     const container = document.createElement('div')
     container.classList.add('container')
@@ -46,7 +33,7 @@ async function init() {
     const userPostDiv = document.createElement('div')
     userPostDiv.classList.add('col-xl-4')
     const userElement = document.createElement('div')
-    userElement.classList.add('user-wrapper', 'me-auto', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded')
+    userElement.classList.add('user-wrapper', 'mx-auto', 'me-md-auto', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded')
     const postWrapper = document.createElement('div')
     postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'p-4' )
     const postElement = document.createElement('div')
@@ -85,8 +72,9 @@ async function init() {
             const userProfilePic = document.createElement('img')
             userProfilePic.src = './images/user-profile.png'
             userProfilePic.classList.add('user-profile-pic')
+            userProfilePic.setAttribute('alt', 'profile picture')
             const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link', 'd-flex', 'flex-row-reverse', 'justify-content-end')
+            resultLink.classList.add('result-link', 'post-author-link', 'd-flex', 'flex-row-reverse', 'justify-content-end')
             resultLink.textContent = firstName
             resultLink.href = `./user.html?user_id=${id}`
 
@@ -146,7 +134,7 @@ async function init() {
             albumItem.classList.add('album-item', 'd-flex', 'flex-column', 'col-3', 'gap-3', 'pb-5', 'justify-content-between',)
 
             const resultLink = document.createElement('a')
-            resultLink.classList.add('result-link', 'd-flex', 'flex-column', 'align-items-start', 'gap-3')
+            resultLink.classList.add('result-link', 'post-author-link', 'd-flex', 'flex-column', 'align-items-start', 'gap-3')
             const albumTitleElement = document.createElement('span')
             albumTitleElement.textContent = title
             // albumTitleElement.textContent = textTruncate(title, 20)
@@ -161,10 +149,12 @@ async function init() {
             albumItemDescription.textContent = `Made by: `
 
             const albumItemDescriptionLink = document.createElement('a')
+            albumItemDescriptionLink.classList.add('post-author-link')
             albumItemDescriptionLink.textContent = name
             albumItemDescriptionLink.href = `./user.html?user_id=${userId}`
 
             const imageWrapper = document.createElement('img')
+            imageWrapper.setAttribute('alt', 'album cover')
             imageWrapper.classList.add('album-pic')
 
             photosArr.map(photo => {
@@ -190,12 +180,6 @@ async function init() {
     mainContent.append(divElement)
     container.append(mainContent)
     pageContent.append(container)
-    pageContent.before(heroBoxElement)
-
-    const screenWidth = window.innerWidth;
-    if (screenWidth < 450) {
-        addClassResponsive('.user-wrapper')
-    }
 }
 
 init()

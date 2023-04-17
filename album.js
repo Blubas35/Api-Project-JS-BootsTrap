@@ -1,4 +1,4 @@
-import { createPageMainHeader } from './header.js'
+import { createPageMainHeader } from './Components/header.js'
 import { firstLetterUpperCase } from "./function.js"
 
 async function init() {
@@ -51,6 +51,7 @@ async function init() {
 
         const photoImg = document.createElement('img');
         photoImg.src = thumbnailUrl;
+        photoImg.setAttribute('alt', 'album cover')
 
         photoLink.appendChild(photoImg);
         divElement.append(photoLink)

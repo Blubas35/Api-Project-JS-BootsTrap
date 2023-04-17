@@ -1,6 +1,6 @@
 import { fetchData, getParams, firstLetterUpperCase } from "./function.js"
 import { API_URL } from "./config.js"
-import { createPageMainHeader } from "./header.js"
+import { createPageMainHeader } from "./Components/header.js"
 
 async function init() {
     const createPostForm = document.querySelector('#create-post-form')

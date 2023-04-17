@@ -1,4 +1,4 @@
-import { createPageMainHeader } from "./header.js"
+import { createPageMainHeader } from "./Components/header.js"
 import { firstLetterUpperCase } from "./function.js"
 
 async function renderUser() {
@@ -61,7 +61,7 @@ async function renderUser() {
     userEmailElement.textContent = `Email address: `
 
     const emailLink = document.createElement('a')
-    emailLink.classList.add('email-link')
+    emailLink.classList.add('email-link', 'post-author-link')
     emailLink.textContent = email
     emailLink.href = `mailto:${email}`
 
@@ -75,7 +75,7 @@ async function renderUser() {
     addressSpanElement.textContent = 'Address: '
 
     const userAddressMapElement = document.createElement('a')
-    userAddressMapElement.classList.add('user-address-link')
+    userAddressMapElement.classList.add('user-address-link', 'post-author-link')
     userAddressMapElement.textContent = `${street}, ${suite}, ${city}, ${zipcode}`
     userAddressMapElement.setAttribute('target', '_blank')
     userAddressMapElement.href = `https://www.google.com/maps/place/${lat},${lng}`
@@ -90,7 +90,7 @@ async function renderUser() {
     userPhoneElement.textContent = `Phone number: `
 
     const userPhone = document.createElement('a')
-    userPhone.classList.add('user-phone')
+    userPhone.classList.add('user-phone', 'post-author-link')
     userPhone.textContent = phone
     userPhone.href = `tel:${phone}`
 
@@ -103,7 +103,7 @@ async function renderUser() {
     spanElement.classList.add('website', 'first')
     spanElement.textContent = `Website: `
     const userWebsiteElement = document.createElement('a')
-    userWebsiteElement.classList.add('user-website', 'col-12')
+    userWebsiteElement.classList.add('user-website', 'col-12', 'post-author-link')
     userWebsiteElement.textContent = `${website}`
     userWebsiteElement.href = '#'
 
