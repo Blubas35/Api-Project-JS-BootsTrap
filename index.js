@@ -1,5 +1,6 @@
 import { createPageMainHeader } from "./Components/header.js";
 import { createHeroBox } from "./Components/heroBox.js";
+import { createFooter } from "./Components/footer.js";
 import { API_URL } from "./config.js";
 import { firstLetterUpperCase, fetchData} from "./function.js";
 
@@ -11,6 +12,7 @@ async function init() {
 
     pageContent.before(createPageMainHeader())
     pageContent.before(createHeroBox('JSON placeholder website', {backgroundImage: 'url(./images/hero-box-bg.jpg)'}))
+    pageContent.after(createFooter())
 
     const container = document.createElement('div')
     container.classList.add('container')

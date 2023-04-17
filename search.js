@@ -1,6 +1,7 @@
 import { createPageMainHeader } from "./Components/header.js";
 import { fetchData, firstLetterUpperCase, getParams } from "./function.js";
 import { API_URL } from "./config.js";
+import { createFooter } from "./Components/footer.js";
 
 async function init() {
 
@@ -8,6 +9,7 @@ async function init() {
     const searchWord = getParams('search')
 
     pageContent.before(createPageMainHeader(false));
+    pageContent.after(createFooter())
 
     const resultWrapper = document.createElement('div')
     resultWrapper.classList.add('result-wrapper')

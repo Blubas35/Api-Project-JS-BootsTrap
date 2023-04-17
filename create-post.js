@@ -10,6 +10,7 @@ export async function init() {
     const bodyElement = createPostForm.querySelector('textarea[name="body"]')
 
     createPostForm.before(createPageMainHeader())
+    
 
     const users = await fetchData(`${API_URL}/users`)
 

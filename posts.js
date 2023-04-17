@@ -3,7 +3,7 @@
 // https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_limit=15
 import { createPageMainHeader } from './Components/header.js'
 import { firstLetterUpperCase } from './function.js';
-import { createHeroBox } from "./Components/heroBox.js";
+import { createFooter } from "./Components/footer.js";
 
 async function init() {
   const res = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=15&_expand=user');
@@ -20,6 +20,7 @@ async function init() {
 
   pageContent.append(postsTitle, postsList);
   pageContent.before(header);
+  pageContent.after(createFooter())
 }
 
 function createPostsListElement(posts) {

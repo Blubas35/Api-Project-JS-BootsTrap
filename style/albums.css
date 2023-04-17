@@ -17,12 +17,31 @@
 .album-title {
     width: 150px;
 }
+
 .album-title:hover {
     opacity: 0.6;
 }
 
 .author-link:hover {
     opacity: 0.6;
+}
+
+@media screen and (min-width: 510px) and (max-width: 850px) {
+    .album-item {
+        flex: 0 0 auto;
+        width: calc((100% / 12) * 4);
+    }
+}
+
+@media screen and (min-width: 330px) and (max-width: 510px) {
+    .album-item {
+        flex: 0 0 auto;
+        width: calc((100% / 12) * 5);
+    }
+
+    .album-list {
+        align-items: center;
+    }
 }
 
 /* a {

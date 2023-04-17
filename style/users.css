@@ -46,6 +46,8 @@
     flex-wrap: wrap;
     gap: 20px;
     width: 100%;
+    max-width: 1000px;
+    overflow-x: auto;
 }
 
 .users-list {

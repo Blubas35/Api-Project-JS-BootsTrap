@@ -1,5 +1,6 @@
 import { createPageMainHeader } from "./Components/header.js"
 import { firstLetterUpperCase } from "./function.js"
+import { createFooter } from "./Components/footer.js";
 
 async function renderUser() {
     const pageContent = document.querySelector('#page-content')
@@ -190,6 +191,6 @@ async function renderUser() {
         userAlbumWrapper.append(userAlbumListTitle, userAlbumList)
         pageContent.append(userAlbumWrapper)
     })
-
+    pageContent.after(createFooter())
 }
 renderUser()

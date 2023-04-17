@@ -1,4 +1,5 @@
 import { createPageMainHeader } from "./Components/header.js"
+import { createFooter } from "./Components/footer.js";
 import { fetchData, firstLetterUpperCase } from "./function.js"
 import { API_URL } from "./config.js"
 
@@ -123,5 +124,6 @@ async function init() {
     
     postsWrapper.append(postsTitle, postsAuthor, postBody, editButtonWrapper)
     pageContent.append(postsWrapper, commentsWrapper, otherPostsElement)
+    pageContent.after(createFooter())
 }
 init()

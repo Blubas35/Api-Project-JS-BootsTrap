@@ -1,4 +1,5 @@
 import { createPageMainHeader } from './Components/header.js'
+import { createFooter } from "./Components/footer.js";
 import { firstLetterUpperCase } from "./function.js"
 
 async function init() {
@@ -61,6 +62,7 @@ async function init() {
     })
     albumWrapper.append(albumTitle, albumAuthorWrapper)
     pageContent.append(albumWrapper, photosWrapper)
+    pageContent.after(createFooter())
 
 }
 

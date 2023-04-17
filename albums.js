@@ -1,6 +1,7 @@
 // https://jsonplaceholder.typicode.com/albums?_expand=user&_embed=photos&_limit=15
 import { firstLetterUpperCase, textTruncate } from './function.js';
 import { createPageMainHeader } from './Components/header.js'
+import { createFooter } from "./Components/footer.js";
 
 async function init() {
     const res = await fetch('https://jsonplaceholder.typicode.com/albums?_limit=15&_embed=photos&_expand=user');
@@ -12,9 +13,12 @@ async function init() {
 
     const pageContent = document.querySelector('#page-content');
     const albumsList = createAlbumsListElement(albums);
+    pageContent.classList.add('px-6', 'px-4')
    
     pageContent.append(albumsList);
     pageContent.before(createPageMainHeader());
+    pageContent.after(createFooter())
+    
 }
 
 function createAlbumsListElement(albums) {
@@ -27,7 +31,7 @@ function createAlbumsListElement(albums) {
     albumsList.append(albumsListTitle)
 
     const rowElement = document.createElement('div')
-    rowElement.classList.add('row', 'row-gap-4')
+    rowElement.classList.add('row', 'gap-4')
 
     albums.map(album => {
         const albumItem = createAlbumItemElement(album);
@@ -46,9 +50,9 @@ function createAlbumItemElement(album) {
     const randomPhoto = album.photos[randomIndex];
 
     const colElement = document.createElement('div')
-    colElement.classList.add('col')
+    colElement.classList.add('col-sm-auto', 'album-item')
     const albumItem = document.createElement('div');
-    albumItem.classList.add('album-item', 'd-flex', 'flex-column', 'gap-2', 'h-100');
+    albumItem.classList.add('d-flex', 'flex-column', 'gap-2', 'h-100');
 
     const imageWrapper = document.createElement('div')
     imageWrapper.classList.add('image-wrapper')

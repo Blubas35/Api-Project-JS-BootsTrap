@@ -1,4 +1,5 @@
 import { createPageMainHeader } from "./Components/header.js";
+import { createFooter } from "./Components/footer.js";
 
 async function init() {
     const res = await fetch(`https://jsonplaceholder.typicode.com/users?_embed=posts`)
@@ -16,7 +17,7 @@ async function init() {
     const pageWrapper = document.createElement('div')
     pageWrapper.classList.add('wrapper')
     const categoriesUsersWrapper = document.createElement('div')
-    categoriesUsersWrapper.classList.add('categories-wrapper')
+    categoriesUsersWrapper.classList.add('categories-wrapper', 'mb-5')
 
     const categories = ['Photo', 'Name', 'Email', 'Phone', 'Website']
     const categoriesList = createCategoriesList(categories)
@@ -26,7 +27,7 @@ async function init() {
     pageContent.append(pageWrapper)
     // pageContent.append(usersListTitle, usersList)
     pageContent.before(createPageMainHeader());
-    console.log(users)
+    pageContent.after(createFooter())
 }
 
 function createListElement(users, photosArr) {
