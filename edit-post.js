@@ -1,6 +1,7 @@
 import { fetchData, getParams, firstLetterUpperCase } from "./function.js"
 import { API_URL } from "./config.js"
 import { createPageMainHeader } from "./Components/header.js"
+import { displayPostMsg } from "./Components/displayMsg.js"
 
 async function init() {
     const createPostForm = document.querySelector('#create-post-form')
@@ -61,6 +62,7 @@ async function init() {
         }
 
         createPostForm.after(await createNewPostElement(newPost))
+        createPostForm.after(displayPostMsg('edited'))
 
     })
 

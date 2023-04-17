@@ -1,6 +1,8 @@
 import { fetchData, deletePreviousElement } from "./function.js"
 import { API_URL } from "./config.js"
 import { createPageMainHeader } from "./Components/header.js"
+import { displayPostMsg } from "./Components/displayMsg.js"
+
 
 export async function init() {
     const createPostForm = document.querySelector('#create-post-form')
@@ -66,6 +68,7 @@ export async function init() {
         createPostForm.after(newPostElement)
 
         event.target.reset()
+        createPostForm.after(displayPostMsg('created'))
     })
 
 }

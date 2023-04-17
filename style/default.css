@@ -65,3 +65,7 @@
 .btn.btn-primary:hover {
     opacity: 80%;
 }
+
+.my-6 {
+    margin-top: 6rem;
+}
