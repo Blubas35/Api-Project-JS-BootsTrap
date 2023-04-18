@@ -6,6 +6,7 @@ import { createFooter } from "./Components/footer.js";
 async function init() {
 
     const pageContent = document.querySelector('#page-content')
+    pageContent.classList.add('px-6', 'px-4')
     const searchWord = getParams('search')
 
     pageContent.before(createPageMainHeader(false));

@@ -11,7 +11,7 @@ async function init() {
     // header and hero box stuff
 
     pageContent.before(createPageMainHeader())
-    pageContent.before(createHeroBox('JSON placeholder website', {backgroundImage: 'url(./images/hero-box-bg.jpg)'}))
+    pageContent.before(createHeroBox('JSON placeholder website', {backgroundImage: 'url(./images/hero-box-bg-bl.jpg)'}))
     pageContent.after(createFooter())
 
     const container = document.createElement('div')
@@ -37,7 +37,7 @@ async function init() {
     const userElement = document.createElement('div')
     userElement.classList.add('user-wrapper', 'mx-auto', 'me-md-auto', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded')
     const postWrapper = document.createElement('div')
-    postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'p-4' )
+    postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'p-3' )
     const postElement = document.createElement('div')
     postElement.classList.add('post-wrapper', 'row', 'shadow-sm', 'mb-5', 'bg-body-tertiary', 'rounded')
     const postImageWrapper = document.createElement('div')

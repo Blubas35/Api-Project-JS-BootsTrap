@@ -10,6 +10,7 @@ async function init() {
     const photosArr = photos.results
 
     const pageContent = document.querySelector('#page-content')
+    pageContent.classList.add('px-7', 'px-4')
     const usersList = createListElement(users, photosArr)
     const usersListTitle = document.createElement('h2')
     usersListTitle.classList.add('users-list-title')
@@ -56,13 +57,10 @@ function createListElement(users, photosArr) {
         const userName = user.name
         const userItem = document.createElement('li')
         userItem.classList.add('user-item')
-        // userItem.classList.add('user-item', 'd-flex', 'justify-content-between')
         const userLink = document.createElement('a')
         userLink.href = `./user.html?user_id=${user.id}`
         userLink.textContent = `${userName}`
         userLink.classList.add('user-name')
-        // const postSpanElement = document.createElement('span')
-        // postSpanElement.textContent = ` (Post count: ${postCount})`
         const emailElement = document.createElement('a')
         emailElement.classList.add('email-address')
         emailElement.href = `mailto:${email}`
@@ -102,7 +100,6 @@ function createCategoriesList(categories) {
         listCategories.append(categoryTitle)
         userListCategories.append(listCategories)
     })
-    // categoriesWrapper.append(userListCategories)
     return userListCategories
 }
 init()
