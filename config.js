@@ -21,4 +21,8 @@ export const MENU_ITEMS = [
         title: 'Create Post',
         path: 'create-post.html',
       },
+      {
+        title: 'Edit Post',
+        path: 'edit-post.html?post_id=1',
+      },
 ]

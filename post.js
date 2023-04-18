@@ -1,5 +1,6 @@
 import { createPageMainHeader } from "./Components/header.js"
 import { createFooter } from "./Components/footer.js";
+import { displayPostMsg } from "./Components/displayMsg.js"
 import { fetchData, firstLetterUpperCase } from "./function.js"
 import { API_URL } from "./config.js"
 
@@ -65,10 +66,6 @@ async function init() {
         const commentItem = document.createElement('li')
         commentItem.classList.add('comment-item', 'shadow-sm', 'col-xl-6', 'col-lg-7', 'col-md-10', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded', 'd-flex', 'flex-column', 'gap-1')
 
-        // const commentTitle = document.createElement('h3')
-        // commentTitle.classList.add('comment-title')
-        // commentTitle.textContent = firstLetterUpperCase(name)
-
         const commentBody = document.createElement('p')
         commentBody.classList.add('comment-body')
         commentBody.textContent = firstLetterUpperCase(body)
@@ -102,6 +99,7 @@ async function init() {
             fetchData(`${API_URL}/comments/${id}`, {
                 method: 'DELETE'
             })
+            commentItem.after(displayPostMsg('deleted'))
         })
 
         commentItem.append(commentBody, authorWrapperElement)

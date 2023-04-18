@@ -37,7 +37,7 @@ export function createPageMainHeader(showCategories = true) {
     const optionArr = ['all', 'posts', 'users', 'albums']
 
     createOptionElement(optionArr, selectElement)
-    form.append(labelElement,selectElement)
+    form.append(labelElement, selectElement)
   }
 
   const searchLabel = document.createElement('label')
