@@ -13,16 +13,16 @@ async function init() {
     pageContent.classList.add('px-7', 'px-4')
     const usersList = createListElement(users, photosArr)
     const usersListTitle = document.createElement('h2')
-    usersListTitle.classList.add('users-list-title')
+    usersListTitle.classList.add('users-list-title', 'p-3', 'fs-1', 'text-dark', 'fw-bolder')
     usersListTitle.textContent = 'User information list'
     const pageWrapper = document.createElement('div')
     pageWrapper.classList.add('wrapper')
     const categoriesUsersWrapper = document.createElement('div')
     categoriesUsersWrapper.classList.add('categories-wrapper', 'mb-5')
 
-    const categories = ['Photo', 'Name', 'Email', 'Phone', 'Website']
-    const categoriesList = createCategoriesList(categories)
-    usersList.prepend(categoriesList)
+    // const categories = ['Photo', 'Name', 'Email', 'Phone', 'Website']
+    // const categoriesList = createCategoriesList(categories)
+    // usersList.prepend(categoriesList)
     categoriesUsersWrapper.append(usersListTitle, usersList)
     pageWrapper.append(categoriesUsersWrapper)
     pageContent.append(pageWrapper)
@@ -37,6 +37,13 @@ function createListElement(users, photosArr) {
 
     const usersList = document.createElement('ul')
     usersList.classList.add('users-list', 'data-list')
+
+    const categories = ['Photo', 'Name', 'Email', 'Phone', 'Website']
+    const categoriesList = createCategoriesList(categories)
+    const userItem = document.createElement('li')
+    userItem.classList.add('user-item')
+    userItem.append(categoriesList)
+    usersList.prepend(userItem)
 
     users.forEach((user, index) => {
         let { email, phone, website } = user
@@ -79,14 +86,10 @@ function createListElement(users, photosArr) {
         usersList.append(userItem)
         usersListWrapper.append(usersList)
     })
-
-
     return usersListWrapper
 }
 
 function createCategoriesList(categories) {
-    const categoriesWrapper = document.createElement('div')
-    categoriesWrapper.classList.add('categories-wrapper')
     const userListCategories = document.createElement('ul')
     userListCategories.classList.add('user-list-categories')
 

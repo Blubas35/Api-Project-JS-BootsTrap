@@ -12,9 +12,7 @@
 .categories-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
     width: 100%;
-    row-gap: 50px;
 }
 
 .user-list-categories {
@@ -24,6 +22,8 @@
     list-style-type: none;
     padding: 0;
     margin-top: 30px;
+    border-bottom: 1px solid black;
+    grid-column: 1/6;
 }
 
 .categories-list {

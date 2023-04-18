@@ -39,7 +39,7 @@ async function init() {
     const postWrapper = document.createElement('div')
     postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'p-3' )
     const postElement = document.createElement('div')
-    postElement.classList.add('post-wrapper', 'row', 'shadow-sm', 'mb-5', 'bg-body-tertiary', 'rounded')
+    postElement.classList.add('post-wrapper', 'gx-5', 'row', 'shadow-sm', 'mb-5', 'bg-body-tertiary', 'rounded')
     const postImageWrapper = document.createElement('div')
     postImageWrapper.classList.add('post-image', 'col-md-6', 'col-12')
     postImageWrapper.style.backgroundImage = 'url("https://images.unsplash.com/photo-1558174685-430919a96c8d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=871&q=80")'
@@ -59,7 +59,7 @@ async function init() {
         const userResults = await fetchData(`${API_URL}/users?_limit=5`)
 
         const userResultTitle = document.createElement('h3')
-        userResultTitle.classList.add('user-result-title', 'fs-4', 'text-dark', 'fw-bolder')
+        userResultTitle.classList.add('user-result-title', 'p-3', 'fs-4', 'text-dark', 'fw-bolder')
         userResultTitle.textContent = `Top 5 contributed users: `
 
         userElement.prepend(userResultTitle)
@@ -94,7 +94,7 @@ async function init() {
         const resultsPosts = await fetchData(`${API_URL}/posts?_limit=3&_expand=user`)
         console.log(resultsPosts)
         const postListTitle = document.createElement('a')
-        postListTitle.classList.add('post-link-title', 'fs-4', 'text-decoration-none', 'text-dark', 'fw-bolder')
+        postListTitle.classList.add('post-link-title', 'p-3', 'fs-4', 'text-decoration-none', 'text-dark', 'fw-bolder')
         postListTitle.textContent = firstLetterUpperCase(resultsPosts[0].title)
         postListTitle.href = './post.html?post_id=' + resultsPosts[0].id
         const postList = document.createElement('p')
