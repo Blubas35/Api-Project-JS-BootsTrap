@@ -33,11 +33,11 @@ async function init() {
     const rowAlbumUserWrapper = document.createElement('div')
     rowAlbumUserWrapper.classList.add('row', 'gx-5')
     const userPostDiv = document.createElement('div')
-    userPostDiv.classList.add('col-xl-4')
+    userPostDiv.classList.add('col-xl-4', 'pe-0')
     const userElement = document.createElement('div')
     userElement.classList.add('user-wrapper', 'mx-auto', 'me-md-auto', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded')
     const postWrapper = document.createElement('div')
-    postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'p-3' )
+    postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'ps-5', 'py-3' )
     const postElement = document.createElement('div')
     postElement.classList.add('post-wrapper', 'gx-5', 'row', 'shadow-sm', 'mb-5', 'bg-body-tertiary', 'rounded')
     const postImageWrapper = document.createElement('div')
@@ -94,17 +94,20 @@ async function init() {
         const resultsPosts = await fetchData(`${API_URL}/posts?_limit=3&_expand=user`)
         console.log(resultsPosts)
         const postListTitle = document.createElement('a')
-        postListTitle.classList.add('post-link-title', 'p-3', 'fs-4', 'text-decoration-none', 'text-dark', 'fw-bolder')
+        postListTitle.classList.add('post-link-title', 'fs-4', 'text-decoration-none', 'text-dark', 'fw-bolder')
         postListTitle.textContent = firstLetterUpperCase(resultsPosts[0].title)
         postListTitle.href = './post.html?post_id=' + resultsPosts[0].id
         const postList = document.createElement('p')
         postList.classList.add('post-content','fw-lighter')
         postList.textContent = firstLetterUpperCase(resultsPosts[0].body)
+        const postButtonWrapper = document.createElement('div')
+        postButtonWrapper.classList.add('post-button-wrapper')
         const postButton = document.createElement('a')
         postButton.classList.add('post-author-link')
         postButton.textContent = 'Read more'
         postButton.href = './post.html?post_id=' + resultsPosts[0].id
-        postWrapper.append(postListTitle, postList, postButton)
+        postButtonWrapper.append(postButton)
+        postWrapper.append(postListTitle, postList, postButtonWrapper)
     }
     await createPostElement()
 
