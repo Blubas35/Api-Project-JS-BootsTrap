@@ -2,16 +2,27 @@ import { createPageMainHeader } from "./Components/header.js";
 import { createHeroBox } from "./Components/heroBox.js";
 import { createFooter } from "./Components/footer.js";
 import { API_URL } from "./config.js";
-import { firstLetterUpperCase, fetchData} from "./function.js";
+import { firstLetterUpperCase, fetchData } from "./function.js";
 
 async function init() {
     const pageContent = document.querySelector('#page-content');
     pageContent.classList.add('px-6', 'px-4')
 
+    // modal loading
+
+    window.addEventListener('load', function () {
+        const modal = document.getElementById('my-modal');
+        modal.style.display = 'block';
+        modal.style.marginTop = '100px';
+
+        const myModal = new bootstrap.Modal(modal);
+        myModal.show();
+    });
+
     // header and hero box stuff
 
     pageContent.before(createPageMainHeader())
-    pageContent.before(createHeroBox('JSON placeholder website', {backgroundImage: 'url(./images/hero-box-bg-bl.jpg)'}))
+    pageContent.before(createHeroBox('JSON placeholder website', { backgroundImage: 'url(./images/hero-box-bg-bl.avif)' }))
     pageContent.after(createFooter())
 
     const container = document.createElement('div')
@@ -37,7 +48,7 @@ async function init() {
     const userElement = document.createElement('div')
     userElement.classList.add('user-wrapper', 'mx-auto', 'me-md-auto', 'shadow-sm', 'p-3', 'mb-5', 'bg-body-tertiary', 'rounded')
     const postWrapper = document.createElement('div')
-    postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'ps-5', 'py-3' )
+    postWrapper.classList.add('post-content-wrapper', 'col-md-6', 'col-12', 'd-flex', 'flex-column', 'row-gap-3', 'ps-5', 'py-3')
     const postElement = document.createElement('div')
     postElement.classList.add('post-wrapper', 'gx-5', 'row', 'shadow-sm', 'mb-5', 'bg-body-tertiary', 'rounded')
     const postImageWrapper = document.createElement('div')
@@ -98,7 +109,7 @@ async function init() {
         postListTitle.textContent = firstLetterUpperCase(resultsPosts[0].title)
         postListTitle.href = './post.html?post_id=' + resultsPosts[0].id
         const postList = document.createElement('p')
-        postList.classList.add('post-content','fw-lighter')
+        postList.classList.add('post-content', 'fw-lighter')
         postList.textContent = firstLetterUpperCase(resultsPosts[0].body)
         const postButtonWrapper = document.createElement('div')
         postButtonWrapper.classList.add('post-button-wrapper')
